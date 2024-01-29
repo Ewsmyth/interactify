@@ -14,4 +14,4 @@ RUN pip install --no-cache-dir -r requirements.txt gunicorn
 EXPOSE 8585
 
 # Run Gunicorn
-CMD ["gunicorn", "-w", "4", "-b", "0.0.0.0:8686", "main:app"]
+CMD ["gunicorn", "-w", "4", "-b", "0.0.0.0:8585", "main:app"]
