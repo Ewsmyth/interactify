@@ -3,11 +3,11 @@ from flask_login import LoginManager
 from .models import db, User
 
 def create_app():
-    app = Flask(__name__, static_folder='D:/addingmediauploads', static_url_path='/uploads')
+    app = Flask(__name__, static_folder='/var/lib/docker/volumes/interactify-uploads', static_url_path='/uploads')
 
-    app.config['UPLOAD_FOLDER'] = 'D:/addingmediauploads'
+    app.config['UPLOAD_FOLDER'] = '/var/lib/docker/volumes/interactify-uploads'
 
-    app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///database.db'
+    app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:////var/lib/docker/volumes/interactify-data/interactify-data.db'
     app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
     app.config['SECRET_KEY'] = 'aabbccddeeffgg'
 
