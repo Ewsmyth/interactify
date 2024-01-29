@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Edit User - {{ username }}</title>
+</head>
+<body {% if current_user and current_user.theme %} class="dark-mode" {% endif %}>
+  <h1>Edit User - {{ username }}</h1>
+
+  <form method="POST">
+    <label for="new_username">New Username:</label>
+    <input type="text" name="new_username" id="new_username" value="{{ user.username }}" required>
+
+    <label for="new_password">New Password:</label>
+    <input type="password" name="new_password" id="new_password" required>
+
+    <label for="new_authority">New Authority:</label>
+    <select name="new_authority" id="new_authority">
+      <option value="admin" {% if user.authority == 'admin' %}selected{% endif %}>Admin</option>
+      <option value="user" {% if user.authority == 'user' %}selected{% endif %}>User</option>
+    </select>
+
+    <button type="submit">Update User</button>
+  </form>
+
+</body>
+</html>

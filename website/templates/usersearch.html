@@ -1,0 +1,28 @@
+{% extends 'userbase.html' %}
+
+{% block title %}User Search{% endblock %}
+
+{% block css %}
+  {{ super() }}
+  <link rel="stylesheet" href="{{ url_for('utils.staticp', filename='css/usersearch.css') }}">
+{% endblock %}
+
+{% block content %}
+
+  <h2>User Search</h2>
+  <form method="post" action="{{ url_for('user.usersearch', username=username) }}">
+    <label for="search_term">Search for users:</label>
+    <input type="text" name="search_term" id="search_term" required>
+    <button type="submit">Search</button>
+  </form>
+
+  {% if users %}
+    <h3>Search results for "{{ search_term }}"</h3>
+    <ul>
+      {% for user in users %}
+        <li><a href="{{ url_for('user.userprofile', username=user.username) }}">{{ user.username }}</a></li>
+      {% endfor %}
+    </ul>
+  {% endif %}
+
+{% endblock %}

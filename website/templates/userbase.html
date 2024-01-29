@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{% block title %}Interactify{% endblock %}</title>
+  {% block css %}{% endblock %}
+  <link rel="stylesheet" href="{{ url_for('utils.staticp', filename='css/userbase.css') }}">
+</head>
+<body {% if current_user and current_user.theme %} class="dark-mode" {% endif %}>
+  <div class="navbar">
+      <a class="home" href="{{ url_for('user.userhome', username=current_user.username) }}"></a>
+      <a class="search" href="{{ url_for('user.usersearch', username=current_user.username) }}"><div></div></a>
+      <a class="post" href="{{ url_for('user.userpost', username=current_user.username) }}"><div></div></a>
+      <a class="profile" href="{{ url_for('user.userprofile', username=current_user.username) }}">
+        {% if current_user.profile_picture %}
+          <img src="{{ url_for('static', filename=current_user.profile_picture) }}" alt="Profile Picture">
+        {% else %}
+          <img src="{{ url_for('utils.staticp', filename='css/icons/default_profile_picture.png') }}" alt="Default Profile Picture">
+        {% endif %}
+      </a>
+  </div>
+  <div class="content">
+    {% block content %}{% endblock %}
+  </div>
+</body>
+</html>

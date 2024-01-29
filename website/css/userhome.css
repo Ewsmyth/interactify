@@ -1,0 +1,195 @@
+:root {
+    --bg-color: rgb(255, 255, 255);
+    --bg-contrast: rgb(0, 0, 0);
+    --head-shad: rgba(0, 0, 0, 0.384);
+    --cmnt-plhldr: rgba(87, 87, 87, 0.8);
+    --delete-icon: url('icons/deleteblack.png');
+}
+body.dark-mode {
+    --bg-color: rgb(0, 0, 0);
+    --bg-contrast: rgb(255, 255, 255);
+    --head-shad: rgba(255, 255, 255, 0.384);
+    --cmnt-plhldr: rgba(250, 250, 250, 0.8);
+    --delete-icon: url('icons/deletewhite.png');
+}
+.header {
+    display: flex;
+    position: fixed;
+    top: 0;
+    width: 100%;
+    background-color: var(--bg-color);
+    z-index: 1000;
+    transition: top 0.3s;
+    box-shadow: 0 0 7px var(--head-shad);
+}
+.header.show {
+    top: -100px;
+}
+.header a {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 50px;
+}
+.header a img {
+    height: 45px;
+}
+.post-wrapper {
+    margin: 50px 0 0 0;
+}
+.main-ul {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 0;
+}
+.single-post {
+    width: 100%;
+    max-width: 500px;
+    min-width: 300px;
+}
+.post-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.post-header a {
+    display: flex;
+    align-items: center;
+    height: 45px;
+    border: none;
+    text-decoration: none;
+}
+.post-header h4 {
+    margin: 0;
+    padding: 0;
+    font-family: sans-serif;
+    font-size: 22px;
+    font-weight: 600;
+    color: var(--bg-contrast);
+}
+.post-header a img {
+    height: 37px;
+    width: 37px;
+    border-radius: 50%;
+    margin: 0 9px 0 6px;
+    border: 1px solid var(--bg-contrast);
+}
+.delete-post-btn {
+    width: 35px;
+    height: 35px;
+    background-color: transparent;
+    border: none;
+    background-image: var(--delete-icon);
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-size: 28px;
+}
+.post-media {
+    overflow: hidden;
+}
+.post-media ul {
+    display: flex;
+    transition: transform 0.5s ease;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+.post-media li {
+    width: 100%;
+}
+.post-media ul li img,
+.post-media ul li video {
+    width: 100%;
+}
+.likes-container {
+    display: flex;
+    align-items: center;
+}
+.like-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: none;
+    background-color: transparent;
+}
+.like-icon {
+    height: 25px;
+    width: 25px;
+}
+.likes-container p {
+    margin: 0;
+    font-family: sans-serif;
+    font-size: 17px;
+    color: var(--bg-contrast);
+    padding: 0 0 0 3px;
+}
+.main-comment {
+    margin: 0 4px 0 4px;
+    font-family: sans-serif;
+    color: var(--bg-contrast);
+    max-height: 48px;
+    overflow: scroll;
+}
+.main-comment a {
+    margin: 0 0 0 5px;
+    text-decoration: none;
+    font-family: sans-serif;
+    color: var(--bg-contrast);
+    font-weight: 600;
+}
+.comments-container form {
+    display: flex;
+    align-items: center;
+    margin: 0 5px 0 5px;
+    height: 38px;
+    overflow: hidden;
+}
+.comments-container form input {
+    width: 85%;
+    outline: none;
+    border: none;
+    padding: 0 5px 0 5px;
+    background-color: transparent;
+    font-family: sans-serif;
+    font-size: 16px;
+    color: var(--bg-contrast);
+}
+.comments-container form input::placeholder {
+    color: var(--cmnt-plhldr);
+}
+.comments-container form button {
+    width: 15%;
+    background-color: rgb(56, 136, 255);
+    border: none;
+    font-family: sans-serif;
+    font-weight: 700;
+    border-radius: 20px;
+    font-size: 16px;
+    color: rgb(255, 255, 255);
+    height: 27px;
+}
+.comments-container ul {
+    display: flex;
+    flex-direction: column;
+    padding: 0;
+}
+.comments-container ul li {
+    list-style: none;
+    margin: 0 5px 0 5px;
+}
+.add-comments {
+    margin: 0 4px 0 4px;
+    font-family: sans-serif;
+    color: var(--bg-contrast);
+    max-height: 48px;
+    overflow: scroll;
+}
+.add-comments a {
+    margin: 0 0 0 5px;
+    text-decoration: none;
+    font-family: sans-serif;
+    color: var(--bg-contrast);
+    font-weight: 600;
+}

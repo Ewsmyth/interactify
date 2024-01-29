@@ -1,0 +1,33 @@
+{% extends 'adminbase.html' %}
+
+{% block title %}Admin Logs{% endblock %}
+
+{% block css %}
+  {{ super() }}
+  <link rel="stylesheet" href="{{ url_for('utils.staticp', filename='css/adminlogs.css') }}">
+{% endblock %}
+
+{% block content %}
+
+  <h1>Admin Logs</h1>
+
+  <table>
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Event Description</th>
+        <th>Timestamp</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for log_event in log_events %}
+        <tr>
+          <td>{{ log_event.id }}</td>
+          <td>{{ log_event.event_description }}</td>
+          <td>{{ log_event.timestamp }}</td>
+        </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+
+{% endblock %}

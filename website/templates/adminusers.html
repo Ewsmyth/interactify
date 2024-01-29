@@ -1,0 +1,55 @@
+{% extends 'adminbase.html' %}
+
+{% block title %}Admin Users{% endblock %}
+
+{% block css %}
+  {{ super() }}
+  <link rel="stylesheet" href="{{ url_for('utils.staticp', filename='css/adminusers.css') }}">
+{% endblock %}
+
+{% block content %}
+  <h1>Admin Users</h1>
+
+  <form method="POST" action="{{ url_for('admin.adminusers', username=username) }}">
+    <label for="field">Search Field:</label>
+    <select name="field" id="field">
+        {% for column in User.__table__.columns %}
+            <option value="{{ column.key }}">{{ column.key }}</option>
+        {% endfor %}
+    </select>
+
+    <label for="keyword">Keyword:</label>
+    <input type="text" name="keyword" id="keyword">
+
+    <button type="submit">Search</button>
+    <a href="{{ url_for('admin.adminusers', username=username) }}"><button type="button">Clear</button></a>
+  </form>
+
+  {% if users %}
+    <table>
+      <thead>
+        <tr>
+          {% for column in User.__table__.columns %}
+            {% if column.key != 'password' %}
+              <th>{{ column.key }}</th>
+            {% endif %}
+          {% endfor %}
+        </tr>
+      </thead>
+      <tbody>
+        {% for user in users %}
+          <tr>
+            {% for column in User.__table__.columns %}
+              {% if column.key != 'password' %}
+              <td><a href="{{ url_for('admin.adminedituser', username=user.username) }}">{{ user[column.key] }}</a></td>
+              {% endif %}
+            {% endfor %}
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  {% else %}
+    <p>No results found.</p>
+  {% endif %}
+
+{% endblock %}

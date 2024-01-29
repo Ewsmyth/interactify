@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>User Stats</title>
+</head>
+<body>
+    <h2>User Stats for {{ user_to_display.username }}</h2>
+
+    <h3>Followers:</h3>
+    <ul>
+        {% for follower in followers %}
+            <li><a href="{{ url_for('user.userprofile', username=follower.follower_user.username) }}">{{ follower.follower_user.username }}</a></li>
+        {% endfor %}
+    </ul>
+
+    <h3>Following:</h3>
+    <ul>
+        {% for followee in following %}
+            <li><a href="{{ url_for('user.userprofile', username=followee.following_user.username) }}">{{ followee.following_user.username }}</a></li>
+        {% endfor %}
+    </ul>
+</body>
+</html>

@@ -1,0 +1,73 @@
+{% extends 'userbase.html' %}
+
+{% block title %}User Post{% endblock %}
+
+{% block css %}
+  {{ super() }}
+  <link rel="stylesheet" href="{{ url_for('utils.staticp', filename='css/userpost.css') }}">
+{% endblock %}
+
+{% block content %}
+
+  <div class="header">
+    <a class="profile" href="{{ url_for('user.userprofile', username=current_user.username) }}"></a>
+    <h1>Post</h1>
+  </div>
+
+  <div class="content-container">
+    <div class="flash-container">
+      {% with messages = get_flashed_messages(with_categories=true) %}
+        {% for category, message in messages %}
+          {% if category == 'error' %}
+            <div class="flash-div error">
+              <div class="flash-message">
+                <img src="{{ url_for('utils.staticp', filename='css/icons/error_flash.png') }}" alt="Flash Error">
+                <h5>Error! {{ message }}</h5>
+              </div>
+              <span class="close-btn" onclick="this.parentElement.style.display='none'">&times;</span>
+            </div>
+          {% elif category == 'success' %}
+            <div class="flash-div success">
+              <div class="flash-message">
+                <img src="{{ url_for('utils.staticp', filename='css/icons/success_flash.png') }}" alt="Flash Error">
+                <h5>Success! {{ message }}</h5>
+              </div>
+              <span class="close-btn" onclick="this.parentElement.style.display='none'">X</span>
+            </div>
+          {% elif category == 'warning' %}
+            <div class="flash-div warning">
+              <div class="flash-message">
+                <img src="{{ url_for('utils.staticp', filename='css/icons/warning_flash.png') }}" alt="Flash Error">
+                <h5>Warning! {{ message }}</h5>
+              </div>
+              <span class="close-btn" onclick="this.parentElement.style.display='none'">&times;</span>
+            </div>
+          {% endif %}
+        {% endfor %}
+      {% endwith %}
+    </div>
+    <form class="upload-form" method="POST" action="{{ url_for('user.userpost', username=username) }}" enctype="multipart/form-data">
+      <div class="file-container">
+        <div class="display-select">
+          <!-- Display selected files here -->
+        </div>
+        <label for="media_files" class="custom-file-upload">
+          <img src="{{ url_for('utils.staticp', filename='css/icons/upload.png') }}">
+          Upload Media
+        </label>
+        <input type="file" name="media_files" id="media_files" accept="image/*, video/*" multiple>
+      </div>
+      <div class="write-here">
+        <textarea name="a2" placeholder="What's on your mind?"></textarea>
+      </div>
+      <div class="submit-post">
+        <input type="submit" value="Share">
+      </div>
+    </form>
+    
+  </div>
+  
+  <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+  <script src="{{ url_for('utils.staticp', filename='js/displayinpost.js') }}"></script>
+
+{% endblock %}

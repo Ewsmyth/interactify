@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport", content="width=device-width, initial-scale=1.0">
+  <title>Login</title>
+  <link rel="stylesheet" href="{{ url_for('utils.staticp', filename='css/authlogin.css') }}">
+</head>
+<body>
+
+  <img class="logo" src="{{ url_for('utils.staticp', filename='css/icons/interactify_logo.png') }}" alt="">
+
+  <div class="login-container">
+    <form action="{{ url_for('auth.login') }}" method="post">
+      <input type="text" name="a2" placeholder="Email or Username" required>
+      <input type="password" name="b2" placeholder="Password" required>
+      <div class="flash-container">
+        {% with messages = get_flashed_messages(with_categories=true) %}
+          {% for category, message in messages %}
+            {% if category == 'error' %}
+              <div class="flash-message error">
+                <img src="{{ url_for('utils.staticp', filename='css/icons/error_flash.png') }}" alt="Flash Error">
+                <h5>Error! {{ message }}</h5>
+              </div>
+            {% elif category == 'success' %}
+              <div class="flash-message success">
+                <img src="{{ url_for('utils.staticp', filename='css/icons/success_flash.png') }}" alt="Flash Error">
+                <h5>Success! {{ message }}</h5>
+              </div>
+            {% elif category == 'warning' %}
+              <div class="flash-message warning">
+                <img src="{{ url_for('utils.staticp', filename='css/icons/warning_flash.png') }}" alt="Flash Error">
+                <h5>Warning! {{ message }}</h5>
+              </div>
+            {% endif %}
+          {% endfor %}
+        {% endwith %}
+      </div>
+      <input type="submit" value="Login">
+    </form>
+    <p>Don't have an account?<a href="{{ url_for('auth.signup') }}">Sign Up</a></p>
+  </div>
+
+</body>
+</html>

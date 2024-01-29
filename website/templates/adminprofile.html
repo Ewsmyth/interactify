@@ -1,0 +1,70 @@
+{% extends 'adminbase.html' %}
+
+{% block title %}Admin Profile{% endblock %}
+
+{% block css %}
+  {{ super() }}
+  <link rel="stylesheet" href="{{ url_for('utils.staticp', filename='css/adminprofile.css') }}">
+{% endblock %}
+
+{% block content %}
+
+  <h1>{{ username }}'s Profile</h1>
+
+  <div class="theme-box">
+    <h2>Theme:</h2>
+    <form id="themeForm" method="POST" action="{{ url_for('admin.adminupdate_theme', username=username) }}">
+      <div class="checkbox-wrapper-34">
+        <input class='tgl tgl-ios' id='toggle-34' type='checkbox' {% if a1.theme %}checked{% endif %} name="b2" value="1" onchange="document.getElementById('themeForm').submit()">
+        <label class='tgl-btn' for='toggle-34'></label>
+      </div>
+    </form>
+  </div>
+
+  <div class="change-username-div">
+    <h2>Change Username:</h2>
+    <form class="change-username-form" action="{{ url_for('admin.admin_change_username', username=username) }}" method="POST">
+      <input type="text" id="usernameInput" name="a2" value="{{ current_user.username }}">
+      <input type="submit" id="submitBtnUsername" value="Save" style="display: none;">
+    </form>
+  </div>
+
+  <div class="change-email-div">
+    <h2>Change Email:</h2>
+    <form class="change-email-form" action="{{ url_for('admin.admin_change_email', username=username) }}" method="POST">
+      <input type="text" id="emailInput" name="a2" value="{{ current_user.email }}">
+      <input type="submit" id="submitBtnEmail" value="Save" style="display: none;">
+    </form>
+  </div>
+  
+  <div class="change-password-div">
+    <h2>Change Password:</h2>
+    <form class="change-password-form" action="{{ url_for('admin.admin_change_password', username=username) }}" method="POST" id="passwordForm">
+      <div class="form-inputs-div">
+        <input type="password" name="a2" id="current_password" placeholder="Current password" required>
+        <input type="password" name="b2" id="new_password" placeholder="New password" required>
+        <input type="password" name="c2" id="confirm_new_password" placeholder="Confirm new password" required>
+      </div>
+      <input type="submit" value="Save" id="submitBtnPassword" style="display: none;" disabled>
+    </form>
+  </div>
+
+  <div class="change-firstname-div">
+    <h2>Change First Name:</h2>
+    <form class="change-firstname-form" action="{{ url_for('admin.admin_change_firstname', username=username) }}" method="POST">
+      <input type="text" id="fnInput" name="a2" value="{{ current_user.first_name }}">
+      <input type="submit" id="fnBtn" value="Save" style="display: none;">
+    </form>
+  </div>
+
+  <div class="change-lastname-div">
+    <h2>Change Last Name:</h2>
+    <form class="change-lastname-form" action="{{ url_for('admin.admin_change_lastname', username=username) }}" method="POST">
+      <input type="text" id="lnInput" name="a2" value="{{ current_user.last_name }}">
+      <input type="submit" id="lnBtn" value="Save" style="display: none;">
+    </form>
+  </div>
+
+  <script src="{{ url_for('utils.staticp', filename='js/savebuttonhide.js') }}"></script>
+
+{% endblock %}

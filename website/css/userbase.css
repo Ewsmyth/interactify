@@ -1,0 +1,83 @@
+:root {
+    --bg-color: rgb(255, 255, 255);
+    --bg-contrast: rgb(0, 0, 0);
+    --nav-shad: rgba(0, 0, 0, 0.384);
+    --home: url('icons/homeblack.png');
+    --search: url('icons/searchblack.png');
+    --post: url('icons/postblack.png');
+}
+body.dark-mode {
+    --bg-color: rgb(0, 0, 0);
+    --bg-contrast: rgb(255, 255, 255);
+    --nav-shad: rgba(255, 255, 255, 0.384);
+    --home: url('icons/homewhite.png');
+    --search: url('icons/searchwhite.png');
+    --post: url('icons/postwhite.png');
+}
+body {
+    background-color: var(--bg-color);
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+}
+.navbar {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    height: 50px;
+    width: 100%;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    z-index: 1000;
+    box-shadow: 0 0 7px var(--nav-shad);
+    background-color: var(--bg-color);
+}
+.navbar a {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 25%;
+    height: 100%;
+}
+.content {
+    margin: 0 0 50px 0;
+}
+.search div {
+    border-left: 1px solid var(--bg-contrast);
+    border-right: 1px solid var(--bg-contrast);
+    height: 80%;
+    width: 100%;
+    background-color: transparent;
+}
+.post div {
+    border-right: 1px solid var(--bg-contrast);
+    height: 80%;
+    width: 100%;
+    background-color: transparent;
+}
+.home {
+    background-image: var(--home);
+    background-size: 42px;
+    background-position: center center;
+    background-repeat: no-repeat;
+}
+.search {
+    background-image: var(--search);
+    background-size: 38px;
+    background-position: center center;
+    background-repeat: no-repeat;
+}
+.post {
+    background-image: var(--post);
+    background-size: 40px;
+    background-position: center center;
+    background-repeat: no-repeat;
+}
+.profile img {
+    height: 40px;
+    aspect-ratio: 1/1;
+    border-radius: 50%;
+    border: 1px solid var(--bg-contrast);
+}

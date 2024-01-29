@@ -1,0 +1,146 @@
+:root {
+    --bg-color: rgb(255, 255, 255);
+}
+
+body.dark-mode {
+    --bg-color: rgb(43, 43, 43);
+}
+
+body {
+    background-color: var(--bg-color);
+    margin: 0;
+    padding: 0;
+}
+
+.sidebar {
+    width: 50px;
+    height: 100%;
+    position: fixed;
+    left: 0;
+    top: 0;
+    display: flex;
+    flex-direction: column;
+    background-color: rgb(0, 0, 0);
+    transition: width 0.5s ease;
+}
+.sidebar.expanded {
+    width: 200px;
+}
+.content-container {
+    border: 1px solid red;
+    margin: 0 0 0 50px;
+    transition: margin 0.5s ease;
+}
+.content-container.expanded {
+    margin-left: 200px;
+}
+
+.sidebar {
+    .expand-icon {
+        background-image: url('icons/sidebarexpandwhite.png');
+    }
+    .home-icon {
+        background-image: url('icons/homewhite.png');
+    }
+    .users-icon {
+        background-image: url('icons/userswhite.png');
+    }
+    .create-user-icon {
+        background-image: url('icons/createuserwhite.png');
+    }
+    .logs-icon {
+        background-image: url('icons/logswhite.png');
+    }
+    .profile-icon {
+        background-image: url('icons/profilewhite.png');
+    }
+    .logout-icon {
+        background-image: url('icons/logoutwhite.png');
+    }
+}
+
+.alpha {
+    text-decoration: none;
+    margin: 0 0 0 0;
+    height: 58px;
+    display: flex;
+    align-items: center;
+}
+.alpha:hover {
+    background-color: rgba(88, 88, 88, 0.4);
+}
+.bravo {
+    display: flex;
+    overflow: hidden;
+    align-items: center;
+}
+.delta {
+    white-space: nowrap;
+    margin: 0 0 0 10px;
+    color: rgb(255, 255, 255);
+    font-family: sans-serif;
+}
+.charlie {
+    background-position: center center;
+    background-size: contain;
+    background-repeat: no-repeat;
+    height: 35px;
+    min-width: 40px;
+    margin: 0 0 0 5px;
+}
+
+
+
+
+.sidebar.expanded .alpha .echo {
+    display: none;
+}
+
+.sidebar .alpha .echo {
+    display: none;
+}
+
+.sidebar:not(.expanded) .alpha:hover .echo {
+    display: inline-block;
+    position: fixed;
+    background-color: rgb(0, 0, 0);
+    color: rgb(255, 255, 255);
+    padding: 10px;
+    border-radius: 5px;
+    white-space: nowrap;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+    z-index: 1;
+    font-family: sans-serif;
+    font-weight: 600;
+}
+
+.sidebar:not(.expanded) {
+    .expand-a:hover .echo {
+        top: 11px;
+        left: 54px;
+    }
+    .home-a:hover .echo {
+        top: 70px;
+        left: 54px;
+    }
+    .users-a:hover .echo {
+        top: 127px;
+        left: 54px;
+    }
+    .create-user-a:hover .echo {
+        top: 185px;
+        left: 54px;
+    }
+    .logs-a:hover .echo {
+        top: 242px;
+        left: 54px;
+    }
+    .profile-a:hover .echo {
+        top: 300px;
+        left: 54px;
+    }
+    .logout-a:hover .echo {
+        top: 359px;
+        left: 54px;
+    }
+}

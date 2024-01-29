@@ -1,0 +1,124 @@
+body {
+    margin: 0;
+    padding: 0;
+    position: relative;
+}
+.logo {
+    width: 88%;
+    max-width: 460px;
+    min-width: 320px;
+    position: absolute;
+    left: 0;
+    right: 0;
+    margin: auto;
+    top: 110px;
+}
+.login-container {
+    box-shadow: 0 0 13px rgba(75, 75, 75, 0.5);
+    width: 80%;
+    max-width: 390px;
+    min-width: 280px;
+    top: 220px;
+    left: 0;
+    right: 0;
+    margin: auto;
+    position: absolute;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+.login-container form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 87%;
+    margin: 15px 0 0 0;
+}
+.login-container form input {
+    height: 40px;
+    margin: 5px 0 5px 0;
+    border: none;
+}
+.login-container form input[type="text"],
+.login-container form input[type="password"] {
+    border-bottom: 1px solid black;
+    width: 86%;
+    outline: none;
+    font-family: sans-serif;
+    font-size: 21px;
+}
+.login-container form input[type="text"]:focus, 
+.login-container form input[type="password"]:focus {
+    border-bottom: 1px solid rgb(56, 136, 255);
+}
+.login-container form input[type="text"]:focus::placeholder, 
+.login-container form input[type="password"]:focus::placeholder {
+    color: rgb(56, 136, 255);
+}
+.login-container form input[type="submit"] {
+    width: 50%;
+    background-color: rgb(56, 136, 255);
+    color: white;
+    border-radius: 7px;
+    font-family: sans-serif;
+    font-weight: 800;
+    font-size: 19px;
+    cursor: pointer;
+}
+.login-container form input[type="submit"]:hover {
+    background-color: rgb(32, 88, 172);
+}
+.login-container p {
+    font-family: sans-serif;
+    font-weight: 100;
+    font-size: 14px;
+    margin: 5px 0 18px 0;
+    position: relative;
+}
+.login-container p a {
+    margin: 0 0 0 4px;
+    font-weight: 600;
+    color: rgb(56, 136, 255);
+    text-decoration: none;
+    cursor: pointer;
+}
+.login-container p a:hover {
+    color: rgb(32, 88, 172);
+}
+.flash-container {
+    width: 87%;
+}
+.flash-message {
+    display: flex;
+    align-items: center;
+    justify-content: left;
+    border-radius: 8px;
+}
+.flash-message img {
+    width: 19px;
+    height: 19px;
+    margin: 0 0 0 6px;
+}
+.flash-message h5 {
+    font-family: sans-serif;
+    font-size: 14px;
+    margin: 10px 0 10px 4px;
+}
+.error {
+    background-color: rgba(255, 0, 0, 0.384);
+}
+.error h5 {
+    color: rgb(126, 0, 0);
+}
+.success {
+    background-color: rgba(0, 255, 13, 0.384);
+}
+.success h5 {
+    color: rgb(0, 126, 0);
+}
+.warning {
+    background-color: rgba(255, 187, 0, 0.384);
+}
+.warning h5 {
+    color: rgb(126, 86, 0);
+}

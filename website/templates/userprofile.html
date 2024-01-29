@@ -1,0 +1,99 @@
+{% extends 'userbase.html' %}
+
+{% block title %}User Profile{% endblock %}
+
+{% block css %}
+  {{ super() }}
+  <link rel="stylesheet" href="{{ url_for('utils.staticp', filename='css/userprofile.css') }}">
+{% endblock %}
+
+{% block content %}
+
+  <div class="profile-header">
+    <div class="sub-header">
+      {% if not is_own_profile %}
+        <a href="{{ url_for('user.userhome', username=current_user.username) }}"></a>
+      {% endif %}
+      <h1>{{ user_to_display.username }}</h1>
+    </div>
+    {% if is_own_profile %}
+      <a class="menu-btn" href="{{ url_for('user.usersettings', username=current_user.username) }}"></a>
+    {% endif %}
+  </div>
+
+  <div class="profile-stats">
+    <div class="stats1">
+      <div class="profile-pic">
+        {% if user_to_display.profile_picture %}
+          <img src="{{ url_for('static', filename=user_to_display.profile_picture) }}" alt="Profile Picture">
+        {% else %}
+          <img class="logo" src="{{ url_for('utils.staticp', filename='css/icons/default_profile_picture.png') }}" alt="Default Profile Picture">
+        {% endif %}
+      </div>
+      <div class="info-div">
+        <div class="post-count-div">
+          <p>{{ user_to_display.posts | length }}</p>
+          <p>Posts</p>
+        </div>
+        <div class="followers-div">
+          <a href="{{ url_for('user.userstats', username=user_to_display.username) }}">
+            <p>{{ user_to_display.followers.all() | length }}</p>
+            <p>Followers</p>
+          </a>
+        </div>
+        <div class="following-div">
+          <a href="{{ url_for('user.userstats', username=user_to_display.username) }}">
+            <p>{{ user_to_display.following.all() | length }}</p>
+            <p>Following</p>
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <div class="stats2">
+      {% if not is_own_profile %}
+        <form action="{{ url_for('user.follow', username=user_to_display.username) }}" method="post" class="follow-form">
+          {% if current_user.is_following(user_to_display) %}
+            <button type="submit" class="follow-btn unfollow" data-followed="true">Unfollow</button>
+          {% else %}
+            <button type="submit" class="follow-btn follow" data-followed="false">Follow</button>
+          {% endif %}
+        </form>
+      {% endif %}
+    </div>
+
+  </div>
+
+
+  
+  <div class="post-wrapper">
+    <div class="flash-container">
+      {% with messages = get_flashed_messages(with_categories=true) %}
+        {% for category, message in messages %}
+          {% if category == 'error' %}
+            <div class="flash-message error">
+              <h5>Error!</h5>{{ message }}
+            </div>
+          {% elif category == 'success' %}
+            <div class="flash-message success">
+              <h5>Success!</h5>{{ message }}
+            </div>
+          {% elif category == 'warning' %}
+            <div class="flash-message warning">
+              <h5>Warning!</h5>{{ message }}
+            </div>
+          {% endif %}
+        {% endfor %}
+      {% endwith %}
+    </div>
+    {% with a2=user_to_display.posts, likes_count=likes_count, c1=c1 %}
+      {% include 'userpostcontainer.html' %}
+    {% endwith %}
+  </div>
+  
+  <script src="{{ url_for('utils.staticp', filename='js/likebtn.js') }}"></script>
+  <script src="{{ url_for('utils.staticp', filename='js/deletepost.js') }}"></script>
+  <script src="{{ url_for('utils.staticp', filename='js/followbtn.js') }}"></script>
+  <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+  
+{% endblock %}

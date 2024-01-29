@@ -1,0 +1,167 @@
+:root {
+    --bg-color: rgb(255, 255, 255);
+    --bg-contrast: rgb(0, 0, 0);
+    --bg-error: rgba(255, 0, 0, 0.479);
+    --text-error: rgb(102, 0, 0);
+    --bg-warning: rgba(255, 160, 0, 0.479);
+    --text-warning: rgb(160, 109, 0);
+    --bg-success: rgba(102, 255, 0, 0.479);
+    --text-success: rgb(59, 160, 0);
+    --back-icon: url('icons/backblack.png');
+}
+body.dark-mode {
+    --bg-color: rgb(0, 0, 0);
+    --bg-contrast: rgb(255, 255, 255);
+    --bg-error: rgba(252, 95, 95, 0.589);
+    --text-error: rgb(255, 171, 171);
+    --bg-warning: rgba(252, 189, 95, 0.589);
+    --text-warning: rgb(255, 228, 171);
+    --bg-success: rgba(139, 252, 95, 0.589);
+    --text-success: rgb(209, 255, 171);
+    --back-icon: url('icons/backwhite.png');
+}
+.header {
+    position: fixed;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    z-index: 2000;
+    background-color: var(--bg-color);
+}
+.header a {
+    text-decoration: none;
+    background-image: var(--back-icon);
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-size: 32px;
+    width: 40px;
+    height: 40px;
+    margin: 0 0 0 2px;
+}
+.header h1 {
+    margin: 0 0 0 10px;
+    font-family: sans-serif;
+    font-weight: 700;
+    font-size: 28px;
+    color: var(--bg-contrast);
+}
+.content-container {
+    margin: 40px 0 0 0;
+}
+.flash-container {
+    display: flex;
+}
+.flash-div {
+    display: flex;
+    width: 100%;
+}
+.flash-message {
+    display: flex;
+    align-items: center;
+}
+.flash-message img {
+    width: 25px;
+    height: 25px;
+    margin: 6px 0 6px 4px;
+}
+.flash-message h5 {
+    margin: 6px 23px 6px 3px;
+    font-family: sans-serif;
+    font-size: 16px;
+}
+.flash-div span {
+    position: absolute;
+    right: 3px;
+    top: 43px;
+    height: 20px;
+    width: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.error {
+    background-color: var(--bg-error);
+    color: var(--text-error);
+}
+.warning {
+    background-color: var(--bg-warning);
+    color: var(--text-warning);
+}
+.success {
+    background-color: var(--bg-success);
+    color: var(--text-success);
+}
+.upload-form {
+    display: flex;
+    flex-direction: column;
+}
+.file-container {
+    margin: 0;
+    border-bottom: 1px solid var(--bg-contrast);
+}
+.display-select {
+    display: flex;
+    flex-wrap: wrap;
+}
+.file-preview {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid var(--bg-contrast);
+}
+.file-preview img {
+    width: 70px;
+    height: auto;
+}
+.custom-file-upload {
+    display: flex;
+    align-items: center;
+    padding: 2px 6px;
+    cursor: pointer;
+    background-color: transparent;
+    color: var(--bg-contrast);
+    font-family: sans-serif;
+    font-size: 16px;
+    font-weight: 600;
+}
+.custom-file-upload img {
+    width: 25px;
+    height: 25px;
+    margin: 0 8px 0 0;
+}
+#media_files {
+    display: none;
+}
+.write-here {
+    border: none;
+    border-bottom: 1px solid var(--bg-contrast);
+}
+.write-here textarea {
+    width: 96%;
+    max-width: 600px;
+    min-width: 250px;
+    max-height: 170px;
+    min-height: 100px;
+    height: 100px;
+    outline: none;
+    font-family: sans-serif;
+    font-size: 15px;
+    padding: 2px 5px;
+    border: none;
+}
+.submit-post {
+    display: flex;
+    justify-content: center;
+}
+.submit-post input[type="submit"] {
+    background-color: rgb(56, 136, 255);
+    color: rgb(255, 255, 255);
+    width: 100px;
+    height: 30px;
+    margin: 15px 0 30px 0;
+    border: none;
+    border-radius: 15px;
+    font-family: sans-serif;
+    font-weight: 600;
+    font-size: 16px;
+}

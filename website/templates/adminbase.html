@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{% block title %}Interactify{% endblock %}</title>
+  {% block css %}{% endblock %}
+  <link rel="stylesheet" href="{{ url_for('utils.staticp', filename='css/adminbase.css') }}">
+</head>
+<body {% if current_user and current_user.theme %} class="dark-mode" {% endif %}>
+
+  <div class="sidebar" id="sidebar">
+
+    <a class="alpha expand-a" href="#" onclick="toggleSidebar()">
+      <div class="bravo expand-div">
+        <div class="charlie expand-icon"></div>
+        <h3 class="delta expand-h3">Collapse</h3>
+        <span class="echo expand-span">Expand</span>
+      </div>
+    </a>
+
+    <a class="alpha home-a" href="{{ url_for('admin.adminhome', username=current_user.username) }}">
+      <div class="bravo home-div">
+        <div class="charlie home-icon"></div>
+        <h3 class="delta home-h3">Home</h3>
+        <span class="echo home-span">Home</span>
+      </div>
+    </a>
+
+    <a class="alpha users-a" href="{{ url_for('admin.adminusers', username=current_user.username) }}">
+      <div class="bravo users-div">
+        <div class="charlie users-icon"></div>
+        <h3 class="delta users-h3">Users</h3>
+        <span class="echo users-span">Users</span>
+      </div>
+    </a>
+
+    <a class="alpha create-user-a" href="{{ url_for('admin.admincreateuser', username=current_user.username) }}">
+      <div class="bravo create-user-div">
+        <div class="charlie create-user-icon"></div>
+        <h3 class="delta create-user-h3">Create User</h3>
+        <span class="echo create-user-span">Create User</span>
+      </div>
+    </a>
+
+    <a class="alpha logs-a" href="{{ url_for('admin.adminlogs', username=current_user.username) }}">
+      <div class="bravo logs-div">
+        <div class="charlie logs-icon"></div>
+        <h3 class="delta logs-h3">Logs</h3>
+        <span class="echo logs-span">Logs</span>
+      </div>
+    </a>
+
+    <a class="alpha profile-a" href="{{ url_for('admin.adminprofile', username=current_user.username) }}">
+      <div class="bravo profile-div">
+        <div class="charlie profile-icon"></div>
+        <h3 class="delta profile-h3">Profile</h3>
+        <span class="echo profile-span">Profile</span>
+      </div>
+    </a>
+
+    <a class="alpha logout-a" href="{{ url_for('auth.logout') }}">
+      <div class="bravo logout-div">
+        <div class="charlie logout-icon"></div>
+        <h3 class="delta logout-h3">Logout</h3>
+        <span class="echo logout-span">Logout</span>
+      </div>
+    </a>
+
+  </div>
+
+  <div class="content-container">
+    {% block content %}{% endblock %}
+  </div>
+
+  <script src="{{ url_for('utils.staticp', filename='js/sidebarexpand.js') }}"></script>
+
+</body>
+</html>

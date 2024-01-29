@@ -1,0 +1,94 @@
+<div id="posts-container">
+  <ul class="main-ul">
+    {% for b1 in a2|reverse if not b1.archive %}
+      <div class="single-post">
+        <div class="post-header">
+          <a href="{{ url_for('user.userprofile', username=b1.author.username) }}">
+            {% if b1.author.profile_picture %}
+              <img src="{{ url_for('static', filename=b1.author.profile_picture) }}">
+            {% else %}
+              <img src="{{ url_for('utils.staticp', filename='css/icons/default_profile_picture.png') }}">
+            {% endif %}
+            <h4>{{ b1.author.username }}</h4>
+          </a>
+          {% if current_user.is_authenticated %}
+            {% if current_user.id == b1.author.id %}
+              <button class="delete-post-btn" data-post-id="{{ b1.id }}"></button>
+            {% endif %}
+          {% endif %}
+        </div>
+
+        {% if b1.media %}
+        <div class="post-media">
+          <ul>
+            {% for media_file in b1.media %}
+              {% if media_file.media_url.lower().endswith(('.png', '.jpg', '.jpeg', '.gif')) %}
+                <!-- Display Image -->
+                <li><img src="{{ url_for('static', filename=media_file.media_url) }}"></li>
+              {% elif media_file.media_url.lower().endswith(('.mp4', '.webm', '.ogg')) %}
+                <!-- Display Video -->
+                <li>
+                  <video controls>
+                    <source src="{{ url_for('static', filename=media_file.media_url) }}" type="video/mp4">
+                    Your browser does not support the video tag.
+                  </video>
+                </li>
+              {% endif %}
+            {% endfor %}
+          </ul>
+        </div>
+        {% endif %}
+
+        <div class="likes-container">
+          {% if current_user.is_authenticated %}
+            <button class="like-btn" data-post-id="{{ b1.id }}" data-liked="{{ c1[b1.id]|default(false) }}">
+              {% if c1[b1.id] %}
+                <img class="like-icon" src="{{ url_for('utils.staticp', filename='css/icons/unlike.png') }}">
+              {% else %}
+                <img class="like-icon" src="{{ url_for('utils.staticp', filename='css/icons/like.png') }}">
+              {% endif %}
+            </button>
+          {% endif %}
+          <p><span id="likes_count_{{ b1.id }}">{{ likes_count[b1.id] }}</span></p>
+        </div>
+
+        <div class="comment-container">
+          <p class="main-comment">
+            <a href="{{ url_for('user.userprofile', username=b1.author.username) }}" class="author-username">{{ b1.author.username }}</a>
+            {{ b1.content }}
+          </p>
+        </div>
+        
+        <div class="comments-container" id="comments-container-{{ b1.id }}">
+          <div class="input-div">
+            {% if current_user.is_authenticated %}
+              <form method="POST" action="{{ url_for('user.upload_comment', username=username, post_id=b1.id) }}" class="comment-form">
+                <input type="text" name="comment_content" id="comment_content_{{ b1.id }}" placeholder="Add a comment..." oninput="toggleShareButton('{{ b1.id }}')">
+                <button type="button" class="post-comment-btn" id="post_comment_btn_{{ b1.id }}" data-post-id="{{ b1.id }}" style="display: none;">Share</button>
+              </form>
+            {% endif %}
+          </div>
+          <ul class="comments-list" id="comments-list-{{ b1.id }}" onclick="toggleCommentsHeight('{{ b1.id }}')" style="max-height: 50px; overflow: hidden;">
+            {% for comment in b1.comments %}
+              <li>
+                <p class="add-comments">
+                  <a href="{{ url_for('user.userprofile', username=comment.comment_user.username) }}">{{ comment.comment_user.username }}</a>
+                  {{ comment.content }}
+                </p>
+              </li>
+            {% endfor %}
+          </ul>
+        </div>
+
+      </div>
+
+    {% endfor %}
+  </ul>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+<script src="{{ url_for('utils.staticp', filename='js/deletepost.js') }}"></script>
+<script src="{{ url_for('utils.staticp', filename='js/comment.js') }}"></script>
+<script src="{{ url_for('utils.staticp', filename='js/slider.js') }}"></script>
+<script src="{{ url_for('utils.staticp', filename='js/sharebtn.js') }}"></script>
+<script src="{{ url_for('utils.staticp', filename='js/showcomments.js') }}"></script>

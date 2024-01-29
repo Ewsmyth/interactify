@@ -1,0 +1,330 @@
+:root {
+    --bg-color: rgb(255, 255, 255);
+    --bg-contrast: rgb(0, 0, 0);
+    --bg-error: rgba(255, 0, 0, 0.479);
+    --text-error: rgb(102, 0, 0);
+    --bg-warning: rgba(255, 160, 0, 0.479);
+    --text-warning: rgb(160, 109, 0);
+    --bg-success: rgba(102, 255, 0, 0.479);
+    --text-success: rgb(59, 160, 0);
+    --back-icon: url('icons/backblack.png');
+}
+body.dark-mode {
+    --bg-color: rgb(0, 0, 0);
+    --bg-contrast: rgb(255, 255, 255);
+    --bg-error: rgba(252, 95, 95, 0.589);
+    --text-error: rgb(255, 171, 171);
+    --bg-warning: rgba(252, 189, 95, 0.589);
+    --text-warning: rgb(255, 228, 171);
+    --bg-success: rgba(139, 252, 95, 0.589);
+    --text-success: rgb(209, 255, 171);
+    --back-icon: url('icons/backwhite.png');
+}
+body {
+    background-color: var(--bg-color);
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+}
+.header {
+    position: fixed;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    z-index: 2000;
+    background-color: var(--bg-color);
+}
+.header a {
+    text-decoration: none;
+    background-image: var(--back-icon);
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-size: 32px;
+    width: 40px;
+    height: 40px;
+    margin: 0 0 0 2px;
+}
+.header h1 {
+    margin: 0 0 0 10px;
+    font-family: sans-serif;
+    font-weight: 700;
+    font-size: 28px;
+    color: var(--bg-contrast);
+}
+.content-container {
+    margin: 40px 0 0 0;
+}
+.flash-container {
+    display: flex;
+}
+.flash-div {
+    display: flex;
+    width: 100%;
+}
+.flash-message {
+    display: flex;
+    align-items: center;
+}
+.flash-message img {
+    width: 25px;
+    height: 25px;
+    margin: 6px 0 6px 4px;
+}
+.flash-message h5 {
+    margin: 6px 23px 6px 3px;
+    font-family: sans-serif;
+    font-size: 16px;
+}
+.flash-div span {
+    position: absolute;
+    right: 3px;
+    top: 43px;
+    height: 20px;
+    width: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.error {
+    background-color: var(--bg-error);
+    color: var(--text-error);
+}
+.warning {
+    background-color: var(--bg-warning);
+    color: var(--text-warning);
+}
+.success {
+    background-color: var(--bg-success);
+    color: var(--text-success);
+}
+.profile-pic {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.profile-pic img {
+    height: 90px;
+    width: 90px;
+    border-radius: 50%;
+    border: 1px solid var(--bg-contrast);
+    margin: 15px 0 10px 0;
+}
+.change-profile-picture-div form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.change-profile-picture-div form label.file-label {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: transparent;
+    color: rgb(56, 136, 255);
+    border-radius: 5px;
+    cursor: pointer;
+    font-family: sans-serif;
+}
+.change-profile-picture-div form input[type="file"] {
+    display: none;
+}
+#profile-form input[type="submit"] {
+    height: 25px;
+    width: 70px;
+    border: none;
+    border-radius: 14px;
+    background-color: rgb(56, 136, 255);
+    color: rgb(255, 255, 255);
+    margin: 6px 0 6px 0;
+    font-family: sans-serif;
+    font-weight: 600;
+    font-size: 15px;
+}
+h2 {
+    margin: 8px 0 0 0;
+    font-family: sans-serif;
+    color: var(--bg-contrast);
+    font-weight: 100;
+    font-size: 12px;
+}
+input[type="text"],
+input[type="email"],
+input[type="password"] {
+    height: 25px;
+    border: none;
+    outline: none;
+    border-bottom: 1px solid var(--bg-contrast);
+    margin: 0 0 6px 0;
+    color: var(--bg-contrast);
+    background-color: transparent;
+}
+.change-username-div form input[type="submit"],
+.change-email-div form input[type="submit"],
+.change-password-div form input[type="submit"],
+.change-firstname-div form input[type="submit"],
+.change-lastname-div form input[type="submit"] {
+    height: 25px;
+    width: 70px;
+    border: none;
+    border-radius: 14px;
+    background-color: rgb(56, 136, 255);
+    color: rgb(255, 255, 255);
+    margin: 6px 0 6px 0;
+    font-family: sans-serif;
+    font-weight: 600;
+    font-size: 15px;
+}
+.change-username-div form,
+.change-email-div form,
+.change-password-div form,
+.change-firstname-div form,
+.change-lastname-div form {
+    display: flex;
+    flex-direction: column;
+}
+.change-username-div,
+.change-email-div,
+.change-password-div,
+.change-firstname-div,
+.change-lastname-div {
+    margin: 0 5px 0 5px;
+    max-width: 420px;
+}
+.theme-box {
+    display: flex;
+    flex-direction: column;
+    margin: 0 0 10px 0;
+    height: 40px;
+    .checkbox-wrapper-34 {
+        margin: 0;
+        --light-bg: rgb(0, 0, 0);
+        --light-text: rgb(255, 255, 255);
+        --dark-bg: rgb(255, 255, 255);
+        --dark-text: rgb(0, 0, 0);
+        --toggle-dot: rgb(82, 82, 82);
+        .tgl {
+            display: none;
+        }
+        .tgl, 
+        .tgl:after,
+        .tgl:before,
+        .tgl *,
+        .tgl *:after,
+        .tgl *:before,
+        .tgl + .tgl-btn {
+            box-sizing: border-box;
+            margin: 0 15px 0 0;
+        }
+        .tgl::selection,
+        .tgl:after::selection,
+        .tgl:before::selection,
+        .tgl *::selection,
+        .tgl *:after::selection,
+        .tgl *:before::selection,
+        .tgl + .tgl-btn::selection {
+            background: none;
+        }
+    }
+    .checkbox-wrapper-34 .tgl + .tgl-btn {
+        outline: 0;
+        display: block;
+        width: 57px;
+        height: 27px;
+        position: relative;
+        cursor: pointer;
+        user-select: none;
+        font-size: 12px;
+        font-weight: 400;
+    }
+    .checkbox-wrapper-34 .tgl + .tgl-btn:after,
+    .checkbox-wrapper-34 .tgl + .tgl-btn:before {
+        position: relative;
+        display: block;
+        content: "";
+        width: 44%;
+        height: 100%;
+    }
+    .checkbox-wrapper-34 .tgl + .tgl-btn:after {
+        left: 0;
+    }
+    .checkbox-wrapper-34 .tgl + .tgl-btn:before {
+        display: inline;
+        position: absolute;
+        top: 7px;
+    }
+    .checkbox-wrapper-34 .tgl:checked + .tgl-btn:after {
+        left: 56.5%;
+    }
+    
+    .checkbox-wrapper-34 .tgl-ios + .tgl-btn {
+        background: var(--dark-bg);
+        border-radius: 20rem;
+        padding: 2px;
+        transition: all 0.4s ease;
+        box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.1);
+        box-shadow: 0 0 9px rgba(97, 97, 97, 0.5);
+    }
+    .checkbox-wrapper-34 .tgl-ios + .tgl-btn:after {
+        border-radius: 2em;
+        background: var(--toggle-dot);
+        transition: left 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275), padding 0.3s ease, margin 0.3s ease;
+        box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.2);
+    }
+    .checkbox-wrapper-34 .tgl-ios + .tgl-btn:before {
+        content: "Dark";
+        left: 28px;
+        color: var(--dark-text);
+        transition: left 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        font-family: sans-serif;
+        font-weight: 400;
+        font-size: 12px;
+    }
+    .checkbox-wrapper-34 .tgl-ios + .tgl-btn:active {
+        box-shadow: inset 0 0 0 30px rgba(0, 0, 0, 0.1);
+    }
+    .checkbox-wrapper-34 .tgl-ios + .tgl-btn:active:after {
+        padding-right: 0.4em;
+    }
+    .checkbox-wrapper-34 .tgl-ios:checked + .tgl-btn {
+        background: var(--light-bg);
+    }
+    .checkbox-wrapper-34 .tgl-ios:checked + .tgl-btn:active {
+        box-shadow: inset 0 0 0 30px rgba(0, 0, 0, 0.1);
+    }
+    .checkbox-wrapper-34 .tgl-ios:checked + .tgl-btn:active:after {
+        margin-left: -0.4em;
+    }
+    .checkbox-wrapper-34 .tgl-ios:checked + .tgl-btn:before {
+        content: "Light";
+        left: 4px;
+        color: var(--light-text);
+        font-family: sans-serif;
+        font-weight: 400;
+        font-size: 12px;
+    }
+}
+.bottom-btns {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.logout-div {
+    display: flex;
+}
+.logout-div a,
+.deactivate-account-div form input[type="submit"] {
+    text-decoration: none;
+    background-color: rgb(56, 136, 255);
+    color: rgb(255, 255, 255);
+    width: 110px;
+    height: 25px;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: sans-serif;
+    font-weight: 600;
+    font-size: 15px;
+    margin: 30px 6px 15px 6px;
+    border: none;
+    padding: 0;
+}

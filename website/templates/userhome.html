@@ -1,0 +1,46 @@
+{% extends 'userbase.html' %}
+
+{% block title %}User Home{% endblock %}
+
+{% block css %}
+  {{ super() }}
+  <link rel="stylesheet" href="{{ url_for('utils.staticp', filename='css/userhome.css') }}">
+{% endblock %}
+
+{% block content %}
+
+  <div class="header" id="myHeader">
+    <a href="#" onclick="scrollToTop()">
+      <img class="logo" src="{{ url_for('utils.staticp', filename='css/icons/interactify_logo.png') }}" alt="">
+    </a>
+  </div>
+
+  <div class="post-wrapper">
+    <div class="flash-container">
+      {% with messages = get_flashed_messages(with_categories=true) %}
+        {% for category, message in messages %}
+          {% if category == 'error' %}
+            <div class="flash-message error">
+              <h5>Error!</h5>{{ message }}
+            </div>
+          {% elif category == 'success' %}
+            <div class="flash-message success">
+              <h5>Success!</h5>{{ message }}
+            </div>
+          {% elif category == 'warning' %}
+            <div class="flash-message warning">
+              <h5>Warning!</h5>{{ message }}
+            </div>
+          {% endif %}
+        {% endfor %}
+      {% endwith %}
+    </div>
+    {% include 'userpostcontainer.html' %}
+  </div>
+
+  <script src="{{ url_for('utils.staticp', filename='js/likebtn.js') }}"></script>
+  <script src="{{ url_for('utils.staticp', filename='js/deletepost.js') }}"></script>
+  <script src="{{ url_for('utils.staticp', filename='js/header.js') }}"></script>
+  <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+
+{% endblock %}

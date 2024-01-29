@@ -1,0 +1,26 @@
+{% extends 'adminbase.html' %}
+
+{% block title %}Admin Create User{% endblock %}
+
+{% block css %}
+  {{ super() }}
+  <link rel="stylesheet" href="{{ url_for('utils.staticp', filename='css/admincreateuser.css') }}">
+{% endblock %}
+
+{% block content %}
+
+  <h1>Admin Create User</h1>
+
+  <form action="{{ url_for('admin.admincreateuser', username=username) }}" method="post">
+    <input type="text" name="a2" placeholder="Username" required>
+    <input type="email" name="b2" placeholder="Email" required>
+    <input type="password" name="c2" placeholder="Password" required>
+    <select name="d2" id="d2">
+      <option value="" disabled selected>*Authority</option>
+      <option value="user">User</option>
+      <option value="admin">Admin</option>
+    </select>
+    <input type="submit">
+  </form>
+
+{% endblock %}
