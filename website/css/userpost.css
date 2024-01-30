@@ -148,6 +148,8 @@ body.dark-mode {
     font-size: 15px;
     padding: 2px 5px;
     border: none;
+    background-color: transparent;
+    color: var(--bg-contrast);
 }
 .submit-post {
     display: flex;
