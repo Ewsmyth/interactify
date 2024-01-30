@@ -9,20 +9,30 @@
 
 {% block content %}
 
-  <h2>User Search</h2>
-  <form method="post" action="{{ url_for('user.usersearch', username=username) }}">
-    <label for="search_term">Search for users:</label>
-    <input type="text" name="search_term" id="search_term" required>
-    <button type="submit">Search</button>
+  <form class="header-form" method="post" action="{{ url_for('user.usersearch', username=username) }}">
+    <input type="text" name="search_term" id="search_term" placeholder="Lets find someone..." required>
+    <button type="submit" id="search_button" style="display: none;">Search</button>
   </form>
 
-  {% if users %}
-    <h3>Search results for "{{ search_term }}"</h3>
-    <ul>
-      {% for user in users %}
-        <li><a href="{{ url_for('user.userprofile', username=user.username) }}">{{ user.username }}</a></li>
-      {% endfor %}
-    </ul>
-  {% endif %}
+  <div class="content-container">
+    {% if users %}
+      <ul class="results-ul">
+        {% for user in users %}
+          <li class="single-user">
+            <a href="{{ url_for('user.userprofile', username=user.username) }}">
+              {% if user.profile_picture %}
+                <img src="{{ url_for('static', filename=user.profile_picture) }}" alt="Profile Picture">
+              {% else %}
+                <img class="logo" src="{{ url_for('utils.staticp', filename='css/icons/default_profile_picture.png') }}" alt="Default Profile Picture">
+              {% endif %}
+              <h3>{{ user.username }}</h3>
+            </a>
+          </li>
+        {% endfor %}
+      </ul>
+    {% endif %}
+  </div>
+
+  <script src="{{ url_for('utils.staticp', filename='js/searchshow.js') }}"></script>
 
 {% endblock %}

@@ -3,6 +3,7 @@ from .utils import userreq, current_user_has_liked
 from flask_login import login_required, current_user
 from .models import db, User, Post, Likes, Media, ALLOWED_EXTENSIONS, generate_unique_filename, Follower, LogEvent, Comment
 from sqlalchemy import and_, or_, not_, desc
+from sqlalchemy.sql.expression import func
 import os
 
 user = Blueprint('user', __name__)
@@ -110,7 +111,10 @@ def usersearch(username):
         ).all()
         return render_template('usersearch.html', username=username, users=users, search_term=search_term)
 
-    return render_template('usersearch.html', username=username, users=None, search_term=None)
+    # If no search term is provided, query for 20 random users in random order
+    random_users = User.query.filter(User.authority != 'admin').order_by(func.random()).limit(20).all()
+
+    return render_template('usersearch.html', username=username, users=random_users, search_term=None)
 
 @user.route('/<username>/userprofile/usersettings')
 @login_required
