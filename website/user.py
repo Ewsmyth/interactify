@@ -309,15 +309,15 @@ def user_change_password(username):
 
     if not a1 or not b1 or not c1:
         flash('Please complete all password fields', 'warning')
-        return redirect(url_for('user.account', username=username))
+        return redirect(url_for('user.usersettings', username=username))
 
     if b1 != c1:
         flash('Passwords do not match', 'error')
-        return redirect(url_for('user.account', username=username))
+        return redirect(url_for('user.usersettings', username=username))
 
     if not current_user.check_password(a1):
         flash('Incorrect password', 'error')
-        return redirect(url_for('user.account', username=username))
+        return redirect(url_for('user.usersettings', username=username))
 
     current_user.set_password(b1)
 

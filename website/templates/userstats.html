@@ -4,22 +4,85 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>User Stats</title>
+  <link rel="stylesheet" href="{{ url_for('utils.staticp', filename='css/userstats.css') }}">
 </head>
-<body>
-    <h2>User Stats for {{ user_to_display.username }}</h2>
+<body {% if current_user and current_user.theme %} class="dark-mode" {% endif %}>
+    
+  <div class="header-div">
+    <a href="{{ url_for('user.userprofile', username=user_to_display.username) }}"></a>
+    <h1>{{ user_to_display.username }}</h1>
+  </div>
 
-    <h3>Followers:</h3>
-    <ul>
-        {% for follower in followers %}
-            <li><a href="{{ url_for('user.userprofile', username=follower.follower_user.username) }}">{{ follower.follower_user.username }}</a></li>
-        {% endfor %}
-    </ul>
+  <div class="content-container">
 
-    <h3>Following:</h3>
-    <ul>
-        {% for followee in following %}
-            <li><a href="{{ url_for('user.userprofile', username=followee.following_user.username) }}">{{ followee.following_user.username }}</a></li>
-        {% endfor %}
-    </ul>
+    <div class="pageBtns">
+      <button class="tab" id="followers">Followers</button>
+      <button class="tab" id="following">Following</button>
+    </div>
+
+    <div class="container">
+
+      <div class="carousel">
+
+        <div class="slider">
+
+          <section class="followers-section">
+            <ul>
+              {% for follower in followers %}
+                <li>
+                  <a href="{{ url_for('user.userprofile', username=follower.follower_user.username) }}">
+                    <div class="user-info">
+                      {% if follower.follower_user.profile_picture %}
+                        <img src="{{ url_for('static', filename=follower.follower_user.profile_picture) }}">
+                      {% else %}
+                        <img src="{{ url_for('utils.staticp', filename='css/icons/default_profile_picture.png') }}">
+                      {% endif %}
+
+                      <div class="user-name">
+                        <h3 class="name" id="username1">{{ follower.follower_user.username }}</h3>
+                        <p class="name" id="username2">{{ follower.follower_user.first_name }} {{ follower.follower_user.last_name }}</p>
+                      </div>
+
+                    </div>
+                  </a>
+                </li>
+              {% endfor %}
+            </ul>
+          </section>
+
+          <section class="following-section">
+            <ul>
+              {% for followee in following %}
+                <li>
+                  <a href="{{ url_for('user.userprofile', username=followee.following_user.username) }}">
+                    <div class="user-info">
+                      {% if followee.following_user.profile_picture %}
+                        <img src="{{ url_for('static', filename=followee.following_user.profile_picture) }}">
+                      {% else %}
+                        <img src="{{ url_for('utils.staticp', filename='css/icons/default_profile_picture.png') }}">
+                      {% endif %}
+
+                      <div class="user-name">
+                        <h3 class="name" id="username1">{{ followee.following_user.username }}</h3>
+                        <p class="name" id="username2">{{ followee.following_user.first_name }} {{ followee.following_user.last_name }}</p>
+                      </div>
+
+                    </div>
+                  </a>
+                </li>
+              {% endfor %}
+            </ul>
+          </section>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+  <script src="{{ url_for('utils.staticp', filename='js/statsslider.js') }}"></script>
+
 </body>
 </html>

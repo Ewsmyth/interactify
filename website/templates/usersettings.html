@@ -66,23 +66,23 @@
     <div class="change-username-div">
       <h2>Username</h2>
       <form action="{{ url_for('user.user_change_username', username=username) }}" method="POST">
-        <input type="text" value="{{ current_user.username }}">
+        <input name="a2" type="text" value="{{ current_user.username }}">
         <input type="submit" value="Save">
       </form>
     </div>
     <div class="change-email-div">
       <h2>Email</h2>
       <form action="{{ url_for('user.user_change_email', username=username) }}" method="POST">
-        <input type="email" value="{{ current_user.email }}">
+        <input name="a2" type="email" value="{{ current_user.email }}">
         <input type="submit" value="Save">
       </form>
     </div>
     <div class="change-password-div">
       <h2>Password</h2>
       <form action="{{ url_for('user.user_change_password', username=username) }}" method="POST" id="passwordForm">
-        <input type="password" placeholder="Current password" required>
-        <input type="password" placeholder="New password" required>
-        <input type="password" placeholder="Confirm new password" required>
+        <input name="a2" type="password" placeholder="Current password" required>
+        <input name="b2" type="password" placeholder="New password" required>
+        <input name="c2" type="password" placeholder="Confirm new password" required>
         <input type="submit" value="Save">
       </form>
     </div>

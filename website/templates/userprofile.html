@@ -32,7 +32,10 @@
       </div>
       <div class="info-div">
         <div class="post-count-div">
-          <p>{{ user_to_display.posts | length }}</p>
+          <p>
+            {%- set archived_posts = user_to_display.posts | selectattr('archive', 'equalto', false) | list %}
+            {{ archived_posts | length }}
+          </p>
           <p>Posts</p>
         </div>
         <div class="followers-div">
