@@ -60,7 +60,7 @@ def userpost(username):
         db.session.add(c1)
         db.session.commit()
 
-        event_description = f"User '{b1.username}' posted '{c1.content}'"
+        event_description = f"{b1.username} posted {c1.content}."
         new_event = LogEvent(event_description=event_description)
         db.session.add(new_event)
         db.session.commit()
@@ -187,7 +187,7 @@ def delete_post(post_id):
         # Soft delete: Set the 'archive' field to True
         post.archive = True
 
-        event_description = f"User '{current_user.username}' deleted post '{post_id}'."
+        event_description = f"{current_user.username} deleted post {post_id}."
         new_event = LogEvent(event_description=event_description)
         db.session.add(new_event)
 
@@ -264,7 +264,7 @@ def user_change_username(username):
 
     current_user.username = a1
 
-    c1 = f"User '{current_user.id}' changed their username to '{a1}'."
+    c1 = f"User {current_user.id} changed their username to {a1}."
     d1 = LogEvent(event_description=c1)
     db.session.add(d1)
 
@@ -290,7 +290,7 @@ def user_change_email(username):
 
     current_user.email = a1
 
-    c1 = f"User {current_user.username} changed their email to {a1}."
+    c1 = f"{current_user.username} changed their email to {a1}."
     d1 = LogEvent(event_description=c1)
     db.session.add(d1)
 
@@ -321,7 +321,7 @@ def user_change_password(username):
 
     current_user.set_password(b1)
 
-    d1 = f"User, {current_user.username} changed their password"
+    d1 = f"{current_user.username} changed their password."
     e1 = LogEvent(event_description=d1)
     db.session.add(e1)
 
@@ -338,7 +338,7 @@ def user_change_firstname(username):
 
     current_user.first_name = a1
 
-    c1 = f"User {current_user.username} changed their First Name to {a1}."
+    c1 = f"{current_user.username} changed their first name to {a1}."
     d1 = LogEvent(event_description=c1)
     db.session.add(d1)
 
@@ -355,7 +355,7 @@ def user_change_lastname(username):
 
     current_user.last_name = a1
 
-    c1 = f"User {current_user.username} changed their Last Name to {a1}."
+    c1 = f"{current_user.username} changed their last name to {a1}."
     d1 = LogEvent(event_description=c1)
     db.session.add(d1)
 
@@ -389,7 +389,7 @@ def user_change_profile_picture(username):
 def deactivate_account(username):
     current_user.is_active = False
 
-    event_description = f"User '{current_user.username}' deactivated their account."
+    event_description = f"{current_user.username} deactivated their account."
     new_event = LogEvent(event_description=event_description)
     db.session.add(new_event)
 
