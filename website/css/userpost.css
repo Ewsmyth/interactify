@@ -107,6 +107,7 @@ body.dark-mode {
     border: none;
     background-color: transparent;
     color: var(--bg-contrast);
+    resize: none;
 }
 .submit-post {
     display: flex;
