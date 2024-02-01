@@ -1,28 +1,91 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Edit User - {{ username }}</title>
-</head>
-<body {% if current_user and current_user.theme %} class="dark-mode" {% endif %}>
-  <h1>Edit User - {{ username }}</h1>
+{% extends 'adminbase.html' %}
 
-  <form method="POST">
-    <label for="new_username">New Username:</label>
-    <input type="text" name="new_username" id="new_username" value="{{ user.username }}" required>
+{% block title %}Admin Create User{% endblock %}
 
-    <label for="new_password">New Password:</label>
-    <input type="password" name="new_password" id="new_password" required>
+{% block css %}
+  {{ super() }}
+  <link rel="stylesheet" href="{{ url_for('utils.staticp', filename='css/adminedituser.css') }}">
+{% endblock %}
 
-    <label for="new_authority">New Authority:</label>
-    <select name="new_authority" id="new_authority">
-      <option value="admin" {% if user.authority == 'admin' %}selected{% endif %}>Admin</option>
-      <option value="user" {% if user.authority == 'user' %}selected{% endif %}>User</option>
-    </select>
+{% block content %}
+  <div class="edit-user-banner">
+    <h1>Edit {{ user_to_edit.username }}</h1>
+  </div>
 
-    <button type="submit">Update User</button>
-  </form>
+  <div class="flash-container">
+    {% with messages = get_flashed_messages(with_categories=true) %}
+      {% for category, message in messages %}
+        {% if category == 'error' %}
+          <div class="flash-div error">
+            <div class="flash-message">
+              <img src="{{ url_for('utils.staticp', filename='css/icons/error_flash.png') }}" alt="Flash Error">
+              <h5>Error! {{ message }}</h5>
+            </div>
+            <span class="close-btn" onclick="this.parentElement.style.display='none'">&times;</span>
+          </div>
+        {% elif category == 'success' %}
+          <div class="flash-div success">
+            <div class="flash-message">
+              <img src="{{ url_for('utils.staticp', filename='css/icons/success_flash.png') }}" alt="Flash Error">
+              <h5>Success! {{ message }}</h5>
+            </div>
+            <span class="close-btn" onclick="this.parentElement.style.display='none'">&times;</span>
+          </div>
+        {% elif category == 'warning' %}
+          <div class="flash-div warning">
+            <div class="flash-message">
+              <img src="{{ url_for('utils.staticp', filename='css/icons/warning_flash.png') }}" alt="Flash Error">
+              <h5>Warning! {{ message }}</h5>
+            </div>
+            <span class="close-btn" onclick="this.parentElement.style.display='none'">&times;</span>
+          </div>
+        {% endif %}
+      {% endfor %}
+    {% endwith %}
+  </div>
 
-</body>
-</html>
+  <div class="edit-user-div">
+
+    <div class="edit-user-usrnm">
+      <h2>Update Username</h2>
+      <form action="{{ url_for('admin.admineditusername', username=user_to_edit.username) }}" method="post">
+        <input type="text" id="editUsernameInput" name="new_username" value="{{ user_to_edit.username }}" placeholder="Username" required>
+        <input type="submit" id="submitEditUsername" value="Save" style="display: none;">
+      </form>
+    </div>
+
+    <div class="edit-user-pass">
+      <h2>Update Password</h2>
+      <form action="{{ url_for('admin.admineditpassword', username=user_to_edit.username) }}" method="post">
+        <input type="password" id="editPasswordInput" name="new_password" placeholder="Password" required>
+        <input type="submit" id="submitEditPassword" value="Save" style="display: none;">
+      </form>
+    </div>
+
+    <div class="edit-user-auth">
+      <h2>Update Authority</h2>
+      <form action="{{ url_for('admin.admineditauthority', username=user_to_edit.username) }}" method="post">
+        <select id="editAuthInput" name="new_authority">
+          <option value="admin" {% if user_to_edit.authority == 'admin' %}selected{% endif %}>Admin</option>
+          <option value="user" {% if user_to_edit.authority == 'user' %}selected{% endif %}>User</option>
+        </select>
+        <input type="submit" id="submitEditAuth" value="Save" style="display: none;">
+      </form>
+    </div>
+
+    <div class="edit-user-stat">
+      <h2>Update Account Status</h2>
+      <form action="{{ url_for('admin.admineditstatus', username=user_to_edit.username) }}" method="post">
+        <select id="editStatusInput" name="new_acct_stat">
+          <option value="True" {% if user_to_edit.acct_stat %}selected{% endif %}>Active</option>
+          <option value="False" {% if not user_to_edit.acct_stat %}selected{% endif %}>Inactive</option>
+        </select>
+        <input type="submit" id="submitEditStatus" value="Save" style="display: none;">
+      </form>
+    </div>
+
+  </div>
+
+  <script src="{{ url_for('utils.staticp', filename='js/edituserhidebtn.js') }}"></script>
+
+{% endblock %}

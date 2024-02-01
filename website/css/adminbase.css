@@ -27,7 +27,6 @@ body {
     width: 200px;
 }
 .content-container {
-    border: 1px solid red;
     margin: 0 0 0 50px;
     transition: margin 0.5s ease;
 }

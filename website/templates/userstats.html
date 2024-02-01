@@ -11,6 +11,39 @@
   <div class="header-div">
     <a href="{{ url_for('user.userprofile', username=user_to_display.username) }}"></a>
     <h1>{{ user_to_display.username }}</h1>
+
+    <div class="flash-container">
+      {% with messages = get_flashed_messages(with_categories=true) %}
+        {% for category, message in messages %}
+          {% if category == 'error' %}
+            <div class="flash-div error">
+              <div class="flash-message">
+                <img src="{{ url_for('utils.staticp', filename='css/icons/error_flash.png') }}" alt="Flash Error">
+                <h5>Error! {{ message }}</h5>
+              </div>
+              <span class="close-btn" onclick="this.parentElement.style.display='none'">&times;</span>
+            </div>
+          {% elif category == 'success' %}
+            <div class="flash-div success">
+              <div class="flash-message">
+                <img src="{{ url_for('utils.staticp', filename='css/icons/success_flash.png') }}" alt="Flash Error">
+                <h5>Success! {{ message }}</h5>
+              </div>
+              <span class="close-btn" onclick="this.parentElement.style.display='none'">&times;</span>
+            </div>
+          {% elif category == 'warning' %}
+            <div class="flash-div warning">
+              <div class="flash-message">
+                <img src="{{ url_for('utils.staticp', filename='css/icons/warning_flash.png') }}" alt="Flash Error">
+                <h5>Warning! {{ message }}</h5>
+              </div>
+              <span class="close-btn" onclick="this.parentElement.style.display='none'">&times;</span>
+            </div>
+          {% endif %}
+        {% endfor %}
+      {% endwith %}
+    </div>
+
   </div>
 
   <div class="content-container">

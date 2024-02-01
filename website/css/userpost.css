@@ -48,49 +48,6 @@ body.dark-mode {
 .content-container {
     margin: 40px 0 0 0;
 }
-.flash-container {
-    display: flex;
-}
-.flash-div {
-    display: flex;
-    width: 100%;
-}
-.flash-message {
-    display: flex;
-    align-items: center;
-}
-.flash-message img {
-    width: 25px;
-    height: 25px;
-    margin: 6px 0 6px 4px;
-}
-.flash-message h5 {
-    margin: 6px 23px 6px 3px;
-    font-family: sans-serif;
-    font-size: 16px;
-}
-.flash-div span {
-    position: absolute;
-    right: 3px;
-    top: 43px;
-    height: 20px;
-    width: 20px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-.error {
-    background-color: var(--bg-error);
-    color: var(--text-error);
-}
-.warning {
-    background-color: var(--bg-warning);
-    color: var(--text-warning);
-}
-.success {
-    background-color: var(--bg-success);
-    color: var(--text-success);
-}
 .upload-form {
     display: flex;
     flex-direction: column;
@@ -166,4 +123,47 @@ body.dark-mode {
     font-family: sans-serif;
     font-weight: 600;
     font-size: 16px;
+}
+.flash-container {
+    width: 100%;
+}
+.flash-div {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+}
+.flash-message {
+    display: flex;
+    align-items: center;
+}
+.flash-message img {
+    width: 25px;
+    height: 25px;
+    margin: 6px 0 6px 4px;
+}
+.flash-message h5 {
+    margin: 6px 23px 6px 3px;
+    font-family: sans-serif;
+    font-size: 16px;
+}
+.flash-div .close-btn {
+    font-size: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    margin: 0 15px 0 0;
+}
+.error {
+    background-color: var(--bg-error);
+    color: var(--text-error);
+}
+.warning {
+    background-color: var(--bg-warning);
+    color: var(--text-warning);
+}
+.success {
+    background-color: var(--bg-success);
+    color: var(--text-success);
 }

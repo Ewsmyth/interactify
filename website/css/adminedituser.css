@@ -26,14 +26,14 @@ body.dark-mode {
     --bg-success: rgba(139, 252, 95, 0.589);
     --text-success: rgb(209, 255, 171);
 }
-.logs-banner {
+.edit-user-banner {
     display: flex;
     justify-content: center;
     align-items: center;
     height: 55px;
     box-shadow: 0 0 10px var(--head-shad);
 }
-.logs-banner h1 {
+.edit-user-banner h1 {
     font-family: sans-serif;
     font-weight: 600;
     font-size: 32px;
@@ -41,56 +41,86 @@ body.dark-mode {
     margin: 0;
     min-width: 330px;
 }
-.table-div {
+.edit-user-div {
     display: flex;
     flex-direction: column;
-    align-items: center;
+    margin: 15px 0 0 0;
 }
-table {
-    width: 60%;
-    min-width: 850px;
-    margin: 6px 0 0 0;
-    border-collapse: collapse;
-    background-color: transparent;
+.edit-user-usrnm,
+.edit-user-pass,
+.edit-user-auth,
+.edit-user-stat {
+    display: flex;
+    flex-direction: column;
+    margin: 0 0 10px 0;
 }
-th,
-td,
-td form button {
+.edit-user-usrnm h2,
+.edit-user-pass h2,
+.edit-user-auth h2,
+.edit-user-stat h2 {
+    margin: 0 0 0 7px;
     font-family: sans-serif;
-    font-size: 17px;
-    color: var(--bg-contrast);
-}
-th, td {
-    border-left: 1px solid var(--table-br);
-    border-right: 1px solid var(--table-br);
-    border-top: 2px solid var(--table-br);
-    border-bottom: 2px solid var(--table-br);
-    padding: 0 4px;
-    height: 30px;
-    font-family: sans-serif;
-    color: var(--bg-contrast);
-}
-tbody tr:hover {
-    background-color: var(--table-br);
-}
-.clear-td {
-    padding: 0;
-}
-td form {
-    height: 100%;
-    width: 100%;
-}
-td form button {
-    height: 100%;
-    width: 100%;
     font-weight: 600;
-    border: none;
-    background-color: transparent;
-    cursor: pointer;
+    font-size: 13px;
+    color: var(--bg-contrast);
 }
-td form button:hover {
-    background-color: var(--bg-clear);
+.edit-user-usrnm form,
+.edit-user-pass form,
+.edit-user-auth form,
+.edit-user-stat form {
+    display: flex;
+    margin: 0 0 0 20px;
+    align-items: last baseline;
+}
+input[type="text"],
+input[type="password"] {
+    width: 270px;
+    height: 30px;
+}
+select {
+    width: 274px;
+    height: 33px;
+}
+input[type="text"],
+input[type="password"],
+select {
+    outline: none;
+    border: none;
+    border-bottom: 1px solid var(--bg-contrast);
+    font-family: sans-serif;
+    font-size: 15px;
+    background-color: transparent;
+    color: var(--bg-contrast);
+}
+input[type="text"]::placeholder,
+input[type="password"]::placeholder {
+    color: var(--bg-contrast);
+}
+input[type="text"]:focus::placeholder,
+input[type="password"]:focus::placeholder {
     color: rgb(56, 136, 255);
+}
+input[type="text"]:focus,
+input[type="password"]:focus {
+    border-bottom: 1px solid rgb(56, 136, 255);
+}
+option {
+    background-color: var(--bg-color);
+}
+input[type="submit"] {
+    margin: 0 0 0 15px;
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    font-family: sans-serif;
+    font-weight: 800;
+    font-size: 16px;
+    color: rgb(56, 136, 255);
+    border-radius: 13px;
+    padding: 2px 9px;
+}
+input[type="submit"]:hover {
+    background-color: var(--table-br);
 }
 .flash-container {
     width: 100%;

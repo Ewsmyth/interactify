@@ -9,7 +9,68 @@
 
 {% block content %}
 
-  <h1>Admin Home</h1>
+  <div class="home-banner">
+    <img class="logo" src="{{ url_for('utils.staticp', filename='css/icons/adminbanner.png') }}" alt="">
+  </div>
+
+  <div class="flash-container">
+    {% with messages = get_flashed_messages(with_categories=true) %}
+      {% for category, message in messages %}
+        {% if category == 'error' %}
+          <div class="flash-div error">
+            <div class="flash-message">
+              <img src="{{ url_for('utils.staticp', filename='css/icons/error_flash.png') }}" alt="Flash Error">
+              <h5>Error! {{ message }}</h5>
+            </div>
+            <span class="close-btn" onclick="this.parentElement.style.display='none'">&times;</span>
+          </div>
+        {% elif category == 'success' %}
+          <div class="flash-div success">
+            <div class="flash-message">
+              <img src="{{ url_for('utils.staticp', filename='css/icons/success_flash.png') }}" alt="Flash Error">
+              <h5>Success! {{ message }}</h5>
+            </div>
+            <span class="close-btn" onclick="this.parentElement.style.display='none'">&times;</span>
+          </div>
+        {% elif category == 'warning' %}
+          <div class="flash-div warning">
+            <div class="flash-message">
+              <img src="{{ url_for('utils.staticp', filename='css/icons/warning_flash.png') }}" alt="Flash Error">
+              <h5>Warning! {{ message }}</h5>
+            </div>
+            <span class="close-btn" onclick="this.parentElement.style.display='none'">&times;</span>
+          </div>
+        {% endif %}
+      {% endfor %}
+    {% endwith %}
+  </div>
+
+  <div class="counts">
+    <div class="admins-count">
+      <h2>Admins</h2>
+      <h1>{{ a1 }}</h1>
+    </div>
+    <div class="users-count">
+      <h2>Total Users</h2>
+      <h1>{{ b1 }}</h1>
+    </div>
+    <div class="posts-count">
+      <h2>Total Posts</h2>
+      <h1>{{ c1 }}</h1>
+    </div>
+    <div class="media-count">
+      <h2>Total Uploads</h2>
+      <h1>{{ d1 }}</h1>
+    </div>
+    <div class="likes-count">
+      <h2>Total Likes</h2>
+      <h1>{{ e1 }}</h1>
+    </div>
+    <div class="comments-count">
+      <h2>Total Comments</h2>
+      <h1>{{ f1 }}</h1>
+    </div>
+  </div>
 
   <script src="{{ url_for('utils.staticp', filename='js/adminhome.js') }}"></script>
 

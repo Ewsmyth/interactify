@@ -9,18 +9,50 @@
 
 {% block content %}
 
-  <h1>Admin Create User</h1>
-
-  <form action="{{ url_for('admin.admincreateuser', username=username) }}" method="post">
-    <input type="text" name="a2" placeholder="Username" required>
-    <input type="email" name="b2" placeholder="Email" required>
-    <input type="password" name="c2" placeholder="Password" required>
-    <select name="d2" id="d2">
-      <option value="" disabled selected>*Authority</option>
-      <option value="user">User</option>
-      <option value="admin">Admin</option>
-    </select>
-    <input type="submit">
-  </form>
+  <div class="new-user-div">
+    <h1>Create a new user</h1>
+    <div class="flash-container">
+      {% with messages = get_flashed_messages(with_categories=true) %}
+        {% for category, message in messages %}
+          {% if category == 'error' %}
+            <div class="flash-div error">
+              <div class="flash-message">
+                <img src="{{ url_for('utils.staticp', filename='css/icons/error_flash.png') }}" alt="Flash Error">
+                <h5>Error! {{ message }}</h5>
+              </div>
+              <span class="close-btn" onclick="this.parentElement.style.display='none'">&times;</span>
+            </div>
+          {% elif category == 'success' %}
+            <div class="flash-div success">
+              <div class="flash-message">
+                <img src="{{ url_for('utils.staticp', filename='css/icons/success_flash.png') }}" alt="Flash Error">
+                <h5>Success! {{ message }}</h5>
+              </div>
+              <span class="close-btn" onclick="this.parentElement.style.display='none'">&times;</span>
+            </div>
+          {% elif category == 'warning' %}
+            <div class="flash-div warning">
+              <div class="flash-message">
+                <img src="{{ url_for('utils.staticp', filename='css/icons/warning_flash.png') }}" alt="Flash Error">
+                <h5>Warning! {{ message }}</h5>
+              </div>
+              <span class="close-btn" onclick="this.parentElement.style.display='none'">&times;</span>
+            </div>
+          {% endif %}
+        {% endfor %}
+      {% endwith %}
+    </div>
+    <form action="{{ url_for('admin.admincreateuser', username=username) }}" method="post">
+      <input type="text" name="a2" placeholder="Username" required>
+      <input type="email" name="b2" placeholder="Email" required>
+      <input type="password" name="c2" placeholder="Password" required>
+      <select name="d2" id="d2" required>
+        <option value="" disabled selected>*Authority</option>
+        <option value="user">User</option>
+        <option value="admin">Admin</option>
+      </select>
+      <input type="submit" value="Create">
+    </form>
+  </div>
 
 {% endblock %}

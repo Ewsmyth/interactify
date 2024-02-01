@@ -3,6 +3,12 @@
     --bg-contrast: rgb(0, 0, 0);
     --head-shad: rgba(0, 0, 0, 0.384);
     --cmnt-plhldr: rgba(87, 87, 87, 0.8);
+    --bg-error: rgba(255, 0, 0, 0.479);
+    --text-error: rgb(102, 0, 0);
+    --bg-warning: rgba(255, 160, 0, 0.479);
+    --text-warning: rgb(160, 109, 0);
+    --bg-success: rgba(102, 255, 0, 0.479);
+    --text-success: rgb(59, 160, 0);
     --delete-icon: url('icons/deleteblack.png');
 }
 body.dark-mode {
@@ -10,6 +16,12 @@ body.dark-mode {
     --bg-contrast: rgb(255, 255, 255);
     --head-shad: rgba(255, 255, 255, 0.384);
     --cmnt-plhldr: rgba(250, 250, 250, 0.8);
+    --bg-error: rgba(252, 95, 95, 0.589);
+    --text-error: rgb(255, 171, 171);
+    --bg-warning: rgba(252, 189, 95, 0.589);
+    --text-warning: rgb(255, 228, 171);
+    --bg-success: rgba(139, 252, 95, 0.589);
+    --text-success: rgb(209, 255, 171);
     --delete-icon: url('icons/deletewhite.png');
 }
 .header {
@@ -192,4 +204,47 @@ body.dark-mode {
     font-family: sans-serif;
     color: var(--bg-contrast);
     font-weight: 600;
+}
+.flash-container {
+    width: 100%;
+}
+.flash-div {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+}
+.flash-message {
+    display: flex;
+    align-items: center;
+}
+.flash-message img {
+    width: 25px;
+    height: 25px;
+    margin: 6px 0 6px 4px;
+}
+.flash-message h5 {
+    margin: 6px 23px 6px 3px;
+    font-family: sans-serif;
+    font-size: 16px;
+}
+.flash-div .close-btn {
+    font-size: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    margin: 0 15px 0 0;
+}
+.error {
+    background-color: var(--bg-error);
+    color: var(--text-error);
+}
+.warning {
+    background-color: var(--bg-warning);
+    color: var(--text-warning);
+}
+.success {
+    background-color: var(--bg-success);
+    color: var(--text-success);
 }

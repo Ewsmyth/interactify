@@ -20,16 +20,28 @@
       {% with messages = get_flashed_messages(with_categories=true) %}
         {% for category, message in messages %}
           {% if category == 'error' %}
-            <div class="flash-message error">
-              <h5>Error!</h5>{{ message }}
+            <div class="flash-div error">
+              <div class="flash-message">
+                <img src="{{ url_for('utils.staticp', filename='css/icons/error_flash.png') }}" alt="Flash Error">
+                <h5>Error! {{ message }}</h5>
+              </div>
+              <span class="close-btn" onclick="this.parentElement.style.display='none'">&times;</span>
             </div>
           {% elif category == 'success' %}
-            <div class="flash-message success">
-              <h5>Success!</h5>{{ message }}
+            <div class="flash-div success">
+              <div class="flash-message">
+                <img src="{{ url_for('utils.staticp', filename='css/icons/success_flash.png') }}" alt="Flash Error">
+                <h5>Success! {{ message }}</h5>
+              </div>
+              <span class="close-btn" onclick="this.parentElement.style.display='none'">&times;</span>
             </div>
           {% elif category == 'warning' %}
-            <div class="flash-message warning">
-              <h5>Warning!</h5>{{ message }}
+            <div class="flash-div warning">
+              <div class="flash-message">
+                <img src="{{ url_for('utils.staticp', filename='css/icons/warning_flash.png') }}" alt="Flash Error">
+                <h5>Warning! {{ message }}</h5>
+              </div>
+              <span class="close-btn" onclick="this.parentElement.style.display='none'">&times;</span>
             </div>
           {% endif %}
         {% endfor %}
@@ -41,6 +53,6 @@
   <script src="{{ url_for('utils.staticp', filename='js/likebtn.js') }}"></script>
   <script src="{{ url_for('utils.staticp', filename='js/deletepost.js') }}"></script>
   <script src="{{ url_for('utils.staticp', filename='js/header.js') }}"></script>
-  <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+  <script src="{{ url_for('utils.staticp', filename='js/jquery.js') }}"></script>
 
 {% endblock %}

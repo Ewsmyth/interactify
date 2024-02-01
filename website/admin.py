@@ -1,7 +1,7 @@
 from flask import Blueprint, render_template, redirect, flash, url_for, request
 from .utils import adminreq
 from flask_login import login_required, current_user
-from .models import db, User, LogEvent
+from .models import db, User, LogEvent, Post, Likes, Comment, Media
 
 admin = Blueprint('admin', __name__)
 
@@ -9,7 +9,25 @@ admin = Blueprint('admin', __name__)
 @login_required
 @adminreq
 def adminhome(username):
-    return render_template('adminhome.html', username=username)
+    # Count of users with authority=admin
+    a1 = User.query.filter_by(authority='admin').count() # Admin user count
+
+    # Count of users with authority=user
+    b1 = User.query.filter_by(authority='user').count() # User count
+
+    # Total number of posts
+    c1 = Post.query.count() # Total post count
+
+    # Total number of media files
+    d1 = Media.query.count() # Media files count
+
+    # Total number of likes
+    e1 = Likes.query.count() # Total likes count
+
+    # Total number of comments
+    f1 = Comment.query.count() # Total comments count
+
+    return render_template('adminhome.html', username=username, a1=a1, b1=b1, c1=c1, d1=d1, e1=e1, f1=f1)
 
 @admin.route('/<username>/adminhome/adminusers', methods=['GET', 'POST'])
 @login_required
@@ -33,52 +51,39 @@ def adminusers(username):
     # Render the page without search results for initial load
     return render_template('adminusers.html', username=username, User=User)
 
-@admin.route('/<username>/adminhome/adminusers/adminedituser', methods=['GET', 'POST'])
+@admin.route('/<username>/adminhome/adminusers/adminedituser/<int:user_id>', methods=['GET', 'POST'])
 @login_required
 @adminreq
-def adminedituser(username):
-    user_to_edit = User.query.filter_by(username=username).first()
+def adminedituser(username, user_id):
+    user_to_edit = User.query.get_or_404(user_id)
 
-    if request.method == 'POST':
-        # Handle form submission to update username, password, and authority
-        new_username = request.form.get('new_username')
-        new_password = request.form.get('new_password')
-        new_authority = request.form.get('new_authority')
-
-        # Update the user's username, password, and authority
-        user_to_edit.username = new_username
-        user_to_edit.set_password(new_password)
-        user_to_edit.authority = new_authority
-
-        # Commit changes to the database
-        event_description = f"{current_user.username} updated {user_to_edit.username}'s account."
-        new_event = LogEvent(event_description=event_description)
-        db.session.add(new_event)
-        db.session.commit()
-
-        flash('User information updated successfully', 'success')
-        return redirect(url_for('admin.adminusers', username=username))
-
-    return render_template('adminedituser.html', username=username, user=user_to_edit)
+    return render_template('adminedituser.html', username=username, user_to_edit=user_to_edit)
 
 @admin.route('/<username>/adminhome/admincreateuser', methods=['GET', 'POST'])
 @login_required
 @adminreq
 def admincreateuser(username):
     if request.method == 'POST':
-        a1 = request.form.get('a2') # Username
-        b1 = request.form.get('b2') # Email
-        c1 = request.form.get('c2') # Password
-        d1 = request.form.get('d2') # Authority
-        e1 = "Fistname"
+        a1 = request.form.get('a2')  # Username
+        b1 = request.form.get('b2')  # Email
+        c1 = request.form.get('c2')  # Password
+        d1 = request.form.get('d2')  # Authority
+        e1 = "Firstname"
         f1 = "Lastname"
         username = current_user.username
 
+        # Check if username or email is already in use
+        existing_user = User.query.filter((User.username == a1) | (User.email == b1)).first()
+
+        if existing_user:
+            flash('Username or email is already in use by another user.', 'error')
+            return render_template('admincreateuser.html', username=username)
+
         g1 = User(
-            username=a1, 
+            username=a1,
             email=b1,
-            authority=d1, 
-            first_name=e1, 
+            authority=d1,
+            first_name=e1,
             last_name=f1)
         g1.set_password(c1)
         db.session.add(g1)
@@ -110,7 +115,7 @@ def adminprofile(username):
 @login_required
 @adminreq
 def adminlogs(username):
-    log_events = LogEvent.query.order_by(LogEvent.timestamp.desc()).limit(60).all()
+    log_events = LogEvent.query.filter_by(status=False).order_by(LogEvent.timestamp.desc()).limit(60).all()
     return render_template('adminlogs.html', username=username, log_events=log_events)
 
 @admin.route('/<username>/adminprofile/adminupdate_theme', methods=['POST'])
@@ -178,7 +183,7 @@ def admin_change_email(username):
 
     current_user.email = a1
 
-    c1 = f"Admin user {current_user.username} changed their email to {a1}."
+    c1 = f"Admin {current_user.username} changed their email to {a1}."
     d1 = LogEvent(event_description=c1)
     db.session.add(d1)
 
@@ -209,7 +214,7 @@ def admin_change_password(username):
 
     current_user.set_password(b1)
 
-    d1 = f"Admin user, {current_user.username} changed their password"
+    d1 = f"Admin {current_user.username} changed their password."
     e1 = LogEvent(event_description=d1)
     db.session.add(e1)
 
@@ -226,7 +231,7 @@ def admin_change_firstname(username):
 
     current_user.first_name = a1
 
-    c1 = f"Admin user {current_user.username} changed their First Name to {a1}."
+    c1 = f"Admin {current_user.username} changed their first name to {a1}."
     d1 = LogEvent(event_description=c1)
     db.session.add(d1)
 
@@ -243,7 +248,7 @@ def admin_change_lastname(username):
 
     current_user.last_name = a1
 
-    c1 = f"Admin user {current_user.username} changed their Last Name to {a1}."
+    c1 = f"Admin {current_user.username} changed their last name to {a1}."
     d1 = LogEvent(event_description=c1)
     db.session.add(d1)
 
@@ -251,3 +256,85 @@ def admin_change_lastname(username):
 
     flash('Last name changed', 'success')
     return redirect(url_for('admin.adminprofile', username=username))
+
+@admin.route('/<username>/adminhome/update_log_event_status/<int:log_event_id>', methods=['POST'])
+@login_required
+@adminreq
+def update_log_event_status(username, log_event_id):
+    log_event = LogEvent.query.get_or_404(log_event_id)
+    log_event.status = request.form.get('status') == 'True'
+    db.session.commit()
+    flash(f'Status updated for log event with ID {log_event.id}', 'success')
+    return redirect(url_for('admin.adminlogs', username=username))
+
+@admin.route('/<username>/adminhome/adminusers/admineditusername', methods=['POST'])
+@login_required
+@adminreq
+def admineditusername(username):
+    user_to_edit = User.query.filter_by(username=username).first()
+
+    if not user_to_edit:
+        flash('User not found', 'error')
+        return redirect(url_for('admin.adminusers', username=username))
+
+    new_username = request.form.get('new_username')
+    user_to_edit.username = new_username
+
+    event_description = f"{current_user.username} updated {user_to_edit.username}'s username."
+    new_event = LogEvent(event_description=event_description)
+    db.session.add(new_event)
+    db.session.commit()
+
+    flash('Username updated successfully', 'success')
+    return redirect(url_for('admin.adminedituser', username=user_to_edit.username, user_id=user_to_edit.id))
+
+@admin.route('/<username>/adminhome/adminusers/admineditpassword', methods=['POST'])
+@login_required
+@adminreq
+def admineditpassword(username):
+    user_to_edit = User.query.filter_by(username=username).first()
+
+    new_password = request.form.get('new_password')
+    user_to_edit.set_password(new_password)
+
+    event_description = f"{current_user.username} updated {user_to_edit.username}'s password."
+    new_event = LogEvent(event_description=event_description)
+    db.session.add(new_event)
+    db.session.commit()
+
+    flash('Password updated successfully', 'success')
+    return redirect(url_for('admin.adminedituser', username=user_to_edit.username, user_id=user_to_edit.id))
+
+@admin.route('/<username>/adminhome/adminusers/admineditauthority', methods=['POST'])
+@login_required
+@adminreq
+def admineditauthority(username):
+    user_to_edit = User.query.filter_by(username=username).first()
+
+    new_authority = request.form.get('new_authority')
+    user_to_edit.authority = new_authority
+
+    event_description = f"{current_user.username} updated {user_to_edit.username}'s authority."
+    new_event = LogEvent(event_description=event_description)
+    db.session.add(new_event)
+    db.session.commit()
+
+    flash('Authority updated successfully', 'success')
+    return redirect(url_for('admin.adminedituser', username=user_to_edit.username, user_id=user_to_edit.id))
+
+@admin.route('/<username>/adminhome/adminusers/admineditstatus', methods=['POST'])
+@login_required
+@adminreq
+def admineditstatus(username):
+    user_to_edit = User.query.filter_by(username=username).first()
+
+    new_acct_stat = request.form.get('new_acct_stat')
+    user_to_edit.acct_stat = new_acct_stat == 'True'
+
+    event_description = f"{current_user.username} updated {user_to_edit.username}'s status."
+    new_event = LogEvent(event_description=event_description)
+    db.session.add(new_event)
+    db.session.commit()
+
+    flash('Status updated successfully', 'success')
+    return redirect(url_for('admin.adminedituser', username=user_to_edit.username, user_id=user_to_edit.id))

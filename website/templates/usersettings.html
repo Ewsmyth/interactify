@@ -32,7 +32,7 @@
                 <img src="{{ url_for('utils.staticp', filename='css/icons/success_flash.png') }}" alt="Flash Error">
                 <h5>Success! {{ message }}</h5>
               </div>
-              <span class="close-btn" onclick="this.parentElement.style.display='none'">X</span>
+              <span class="close-btn" onclick="this.parentElement.style.display='none'">&times;</span>
             </div>
           {% elif category == 'warning' %}
             <div class="flash-div warning">

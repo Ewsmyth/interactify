@@ -8,21 +8,17 @@
 {% endblock %}
 
 {% block content %}
-  <h1>Admin Users</h1>
 
   <form method="POST" action="{{ url_for('admin.adminusers', username=username) }}">
-    <label for="field">Search Field:</label>
+    <input type="text" name="keyword" id="keyword" placeholder="Search for users...">
     <select name="field" id="field">
-        {% for column in User.__table__.columns %}
-            <option value="{{ column.key }}">{{ column.key }}</option>
-        {% endfor %}
+      {% for column in User.__table__.columns %}
+        <option value="{{ column.key }}">{{ column.key }}</option>
+      {% endfor %}
     </select>
 
-    <label for="keyword">Keyword:</label>
-    <input type="text" name="keyword" id="keyword">
-
-    <button type="submit">Search</button>
-    <a href="{{ url_for('admin.adminusers', username=username) }}"><button type="button">Clear</button></a>
+    <button class="search-btn" type="submit">Search</button>
+    <a class="clear-btn" href="{{ url_for('admin.adminusers', username=username) }}"></a>
   </form>
 
   {% if users %}
@@ -38,10 +34,10 @@
       </thead>
       <tbody>
         {% for user in users %}
-          <tr>
+          <tr class="user-row" data-url="{{ url_for('admin.adminedituser', username=username, user_id=user.id) }}">
             {% for column in User.__table__.columns %}
               {% if column.key != 'password' %}
-              <td><a href="{{ url_for('admin.adminedituser', username=user.username) }}">{{ user[column.key] }}</a></td>
+                <td>{{ user[column.key] }}</td>
               {% endif %}
             {% endfor %}
           </tr>
@@ -49,7 +45,11 @@
       </tbody>
     </table>
   {% else %}
-    <p>No results found.</p>
+    <p class="no-results">No results</p>
   {% endif %}
+
+  <script src="{{ url_for('utils.staticp', filename='js/jquery.js') }}"></script>
+  <script src="{{ url_for('utils.staticp', filename='js/trclick.js') }}"></script>
+
 
 {% endblock %}

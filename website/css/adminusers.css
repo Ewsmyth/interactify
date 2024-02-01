@@ -1,6 +1,101 @@
+:root {
+    --bg-color: rgb(255, 255, 255);
+    --search-bg: rgb(211, 211, 211);
+    --bg-contrast: rgb(0, 0, 0);
+    --head-shad: rgba(0, 0, 0, 0.384);
+    --table-br: rgba(167, 167, 167, 0.384);
+    --clear-ig: url('icons/refreshblack.png');
+}
+body.dark-mode {
+    --bg-color: rgb(43, 43, 43);
+    --search-bg: rgb(15, 15, 15);
+    --bg-contrast: rgb(255, 255, 255);
+    --head-shad: rgba(255, 255, 255, 0.384);
+    --table-br: rgba(19, 19, 19, 0.384);
+    --clear-ig: url('icons/refreshwhite.png');
+}
+form {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0 0 10px var(--head-shad);
+}
+form input[type="text"],
+form select {
+    height: 35px;
+    margin: 10px 5px 10px 0;
+    font-family: sans-serif;
+    font-size: 18px;
+    font-weight: 500;
+    padding: 0 5px 0 10px;
+    border: none;
+    outline: none;
+    background-color: var(--search-bg);
+    border-radius: 15px;
+    color: var(--bg-contrast);
+}
+form input[type="text"] {
+    width: 40%;
+}
+form input[type="text"]::placeholder {
+    color: var(--bg-contrast);
+}
+form select {
+    width: 10%;
+    cursor: pointer;
+}
+.search-btn {
+    font-family: sans-serif;
+    font-weight: 800;
+    font-size: 19px;
+    border-radius: 15px;
+    padding: 4px 10px;
+    border: none;
+    color: rgb(56, 136, 255);
+    background-color: transparent;
+    cursor: pointer;
+    margin: 0 20px 0 0;
+}
+.search-btn:hover {
+    background-color: var(--search-bg);
+}
+.clear-btn {
+    background-image: var(--clear-ig);
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-size: 28px;
+    width: 40px;
+    height: 40px;
+    border-radius: 15px;
+}
+.clear-btn:hover {
+    background-color: var(--search-bg);
+}
+.no-results {
+    font-family: sans-serif;
+    font-weight: 600;
+    font-size: 24px;
+    color: var(--bg-contrast);
+    margin: 10px 0 0 20px;
+}
 table {
     border-collapse: collapse;
+    width: 100%;
+    background-color: transparent;
 }
-td, th {
-    border: 1px solid green;
+th, td {
+    border-left: 1px solid var(--table-br);
+    border-right: 1px solid var(--table-br);
+    border-top: 2px solid var(--table-br);
+    border-bottom: 2px solid var(--table-br);
+    padding: 0 4px;
+    height: 30px;
+    font-family: sans-serif;
+    color: var(--bg-contrast);
+}
+tbody tr {
+    cursor: pointer;
+}
+tbody tr:hover {
+    background-color: var(--table-br);
 }

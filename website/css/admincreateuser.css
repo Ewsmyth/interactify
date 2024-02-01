@@ -1,0 +1,142 @@
+:root {
+    --bg-color: rgb(255, 255, 255);
+    --search-bg: rgb(211, 211, 211);
+    --bg-contrast: rgb(0, 0, 0);
+    --head-shad: rgba(0, 0, 0, 0.384);
+    --table-br: rgba(167, 167, 167, 0.384);
+    --bg-error: rgba(255, 0, 0, 0.479);
+    --text-error: rgb(102, 0, 0);
+    --bg-warning: rgba(255, 160, 0, 0.479);
+    --text-warning: rgb(160, 109, 0);
+    --bg-success: rgba(102, 255, 0, 0.479);
+    --text-success: rgb(59, 160, 0);
+}
+body.dark-mode {
+    --bg-color: rgb(43, 43, 43);
+    --search-bg: rgb(15, 15, 15);
+    --bg-contrast: rgb(255, 255, 255);
+    --head-shad: rgba(255, 255, 255, 0.384);
+    --table-br: rgba(19, 19, 19, 0.384);
+    --bg-error: rgba(252, 95, 95, 0.589);
+    --text-error: rgb(255, 171, 171);
+    --bg-warning: rgba(252, 189, 95, 0.589);
+    --text-warning: rgb(255, 228, 171);
+    --bg-success: rgba(139, 252, 95, 0.589);
+    --text-success: rgb(209, 255, 171);
+}
+.new-user-div,
+form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.new-user-div h1 {
+    font-family: sans-serif;
+    font-weight: 600;
+    font-size: 30px;
+    color: var(--bg-contrast);
+    margin: 100px 0 10px 0;
+}
+form input,
+form select {
+    background-color: transparent;
+}
+form input[type="text"],
+form input[type="email"],
+form input[type="password"] {
+    width: 300px;
+    height: 32px;
+    padding: 0 5px;
+}
+form select {
+    width: 310px;
+    height: 33px;
+    padding: 0 5px;
+    cursor: pointer;
+}
+form input[type="text"],
+form input[type="email"],
+form input[type="password"],
+form select {
+    margin: 7px 0;
+    border: none;
+    border-bottom: 1px solid var(--bg-contrast);
+    outline: none;
+    font-family: sans-serif;
+    font-size: 17px;
+    color: var(--bg-contrast);
+}
+form input[type="text"]::placeholder,
+form input[type="email"]::placeholder,
+form input[type="password"]::placeholder {
+    color: var(--bg-contrast);
+}
+form input[type="text"]:focus,
+form input[type="email"]:focus,
+form input[type="password"]:focus {
+    border-bottom: 1px solid rgb(56, 136, 255);
+}
+form input[type="text"]:focus::placeholder,
+form input[type="email"]:focus::placeholder,
+form input[type="password"]:focus::placeholder {
+    color: rgb(56, 136, 255);
+}
+form select option {
+    background-color: var(--bg-color);
+}
+form input[type="submit"] {
+    font-family: sans-serif;
+    font-weight: 800;
+    font-size: 27px;
+    padding: 5px 12px;
+    border-radius: 15px;
+    color: rgb(56, 136, 255);
+    border: none;
+    cursor: pointer;
+    margin: 30px 0 0 0;
+}
+form input[type="submit"]:hover {
+    background-color: var(--table-br);
+}
+.flash-container {
+    width: 310px;
+}
+.flash-div {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+}
+.flash-message {
+    display: flex;
+    align-items: center;
+}
+.flash-message img {
+    width: 25px;
+    height: 25px;
+    margin: 6px 0 6px 4px;
+}
+.flash-message h5 {
+    margin: 6px 23px 6px 3px;
+    font-family: sans-serif;
+    font-size: 16px;
+}
+.flash-div .close-btn {
+    font-size: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+}
+.error {
+    background-color: var(--bg-error);
+    color: var(--text-error);
+}
+.warning {
+    background-color: var(--bg-warning);
+    color: var(--text-warning);
+}
+.success {
+    background-color: var(--bg-success);
+    color: var(--text-success);
+}

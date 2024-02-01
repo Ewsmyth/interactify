@@ -97,4 +97,5 @@ class Likes(db.Model):
 class LogEvent(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     event_description = db.Column(db.String(255), nullable=False)
+    status = db.Column(db.Boolean, default=False)
     timestamp = db.Column(db.DateTime, default=datetime.utcnow, nullable=False)
