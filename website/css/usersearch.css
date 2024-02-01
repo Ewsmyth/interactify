@@ -87,6 +87,7 @@ body.dark-mode {
     border-radius: 50%;
     border: 1px solid var(--bg-contrast);
     margin: 6px;
+    object-fit: contain;
 }
 .single-user a h3 {
     font-family: sans-serif;

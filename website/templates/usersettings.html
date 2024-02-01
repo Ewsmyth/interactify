@@ -63,6 +63,13 @@
       </form>
     </div>
 
+    <div class="change-bio-div">
+      <h2>Bio</h2>
+      <form action="{{ url_for('user.user_change_bio', username=username) }}" method="POST">
+        <textarea maxlength="200" name="a2" type="text" value="{{ current_user.bio }}"></textarea>
+        <input type="submit" value="Save">
+      </form>
+    </div>
     <div class="change-username-div">
       <h2>Username</h2>
       <form action="{{ url_for('user.user_change_username', username=username) }}" method="POST">

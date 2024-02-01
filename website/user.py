@@ -247,6 +247,28 @@ def update_theme(username):
     flash('Theme update successfully', 'success')
     return redirect(url_for('user.usersettings', username=username))
 
+@user.route('/<username>/userprofile/usersettings/user_change_bio', methods=['POST'])
+@login_required
+@userreq
+def user_change_bio(username):
+    a1 = request.form.get('a2')
+    b1 = User.query.filter_by(bio=a1).first()
+
+    if not a1:
+        flash('Please provide a new bio', 'warning')
+        return redirect(url_for('user.usersettings', username=username))
+
+    current_user.bio = a1
+
+    c1 = f"User {current_user.id} changed their bio."
+    d1 = LogEvent(event_description=c1)
+    db.session.add(d1)
+
+    db.session.commit()
+
+    flash('Bio updated!', 'success')
+    return redirect(url_for('user.usersettings', username=username))
+
 @user.route('/<username>/userprofile/usersettings/user_change_username', methods=['POST'])
 @login_required
 @userreq

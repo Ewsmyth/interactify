@@ -80,4 +80,5 @@ body {
     aspect-ratio: 1/1;
     border-radius: 50%;
     border: 1px solid var(--bg-contrast);
+    object-fit: contain;
 }

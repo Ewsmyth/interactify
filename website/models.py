@@ -32,6 +32,7 @@ class User(db.Model, UserMixin):
     theme = db.Column(db.Boolean(), default=False)
     acct_stat = db.Column(db.Boolean(), nullable=False, default=True)
     profile_picture = db.Column(db.String(255))
+    bio = db.Column(db.String(400))
     created_at = db.Column(db.DateTime, default=datetime.utcnow)
     updated_at = db.Column(db.DateTime, default=datetime.utcnow, onupdate=datetime.utcnow)
 

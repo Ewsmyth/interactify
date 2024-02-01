@@ -92,6 +92,7 @@ body.dark-mode {
     width: 90px;
     border-radius: 50%;
     margin: 0 0 0 8px;
+    object-fit: contain;
 }
 .info-div {
     display: flex;
@@ -144,7 +145,13 @@ body.dark-mode {
     background-color: rgb(56, 136, 255);
     color: rgb(255, 255, 255);
 }
-
+.user-bio-div p {
+    margin: 4px 0 0 0;
+    padding: 0 3px 0 5px;
+    font-family: sans-serif;
+    font-size: 13px;
+    color: var(--bg-contrast);
+}
 
 
 
@@ -193,6 +200,7 @@ body.dark-mode {
     border-radius: 50%;
     margin: 0 9px 0 6px;
     border: 1px solid var(--bg-contrast);
+    object-fit: contain;
 }
 .delete-post-btn {
     width: 35px;
@@ -220,6 +228,8 @@ body.dark-mode {
 .post-media ul li img,
 .post-media ul li video {
     width: 100%;
+    object-fit: contain;
+    max-height: 400px;
 }
 .likes-container {
     display: flex;

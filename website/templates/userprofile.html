@@ -65,10 +65,12 @@
       {% endif %}
     </div>
 
+    <div class="user-bio-div" {% if user_to_display.bio is none %}style="display: none;"{% endif %}>
+      <p>{{ user_to_display.bio }}</p>
+    </div>    
+
   </div>
 
-
-  
   <div class="post-wrapper">
 
     <div class="flash-container">
