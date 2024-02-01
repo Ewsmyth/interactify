@@ -66,21 +66,21 @@
     <div class="change-bio-div">
       <h2>Bio</h2>
       <form action="{{ url_for('user.user_change_bio', username=username) }}" method="POST">
-        <textarea maxlength="200" name="a2" type="text" value="{{ current_user.bio }}"></textarea>
+        <textarea maxlength="200" name="a2" type="text" placeholder="Bio" value="{{ current_user.bio }}"></textarea>
         <input type="submit" value="Save">
       </form>
     </div>
     <div class="change-username-div">
       <h2>Username</h2>
       <form action="{{ url_for('user.user_change_username', username=username) }}" method="POST">
-        <input name="a2" type="text" value="{{ current_user.username }}">
+        <input name="a2" type="text" placeholder="Username" value="{{ current_user.username }}">
         <input type="submit" value="Save">
       </form>
     </div>
     <div class="change-email-div">
       <h2>Email</h2>
       <form action="{{ url_for('user.user_change_email', username=username) }}" method="POST">
-        <input name="a2" type="email" value="{{ current_user.email }}">
+        <input name="a2" type="email" placeholder="Email" value="{{ current_user.email }}">
         <input type="submit" value="Save">
       </form>
     </div>
@@ -96,14 +96,14 @@
     <div class="change-firstname-div">
       <h2>Firstname</h2>
       <form class="change-firstname-form" action="{{ url_for('user.user_change_firstname', username=username) }}" method="POST">
-        <input type="text" name="a2" value="{{ current_user.first_name }}">
+        <input type="text" name="a2" placeholder="First name" value="{{ current_user.first_name }}">
         <input type="submit" value="Save">
       </form>
     </div>
     <div class="change-lastname-div">
       <h2>Lastname</h2>
       <form action="{{ url_for('user.user_change_lastname', username=username) }}" method="POST">
-        <input type="text" name="a2" value="{{ current_user.last_name }}">
+        <input type="text" name="a2" placeholder="Last name" value="{{ current_user.last_name }}">
         <input type="submit" value="Save">
       </form>
     </div>
