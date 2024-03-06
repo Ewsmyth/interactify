@@ -142,7 +142,7 @@ def sweep_media():
     media_urls = [media.media_url for media in Media.query.all()]
 
     # Get all files in the uploads folder
-    uploads_folder = 'D:/interactify-uploads'
+    uploads_folder = '/var/lib/docker/volumes/interactify-uploads'
     all_files = os.listdir(uploads_folder)
 
     # Iterate over files in the uploads folder
