@@ -1,0 +1,15 @@
+{% extends 'adminbase.html' %}
+
+{% block title %}Admin Sweep{% endblock %}
+
+{% block css %}
+  {{ super() }}
+  <link rel="stylesheet" href="{{ url_for('utils.staticp', filename='css/adminsweep.css') }}">
+{% endblock %}
+
+{% block content %}
+  <h1>Admin Sweep</h1>
+  <form action="{{ url_for('admin.sweep_media') }}" method="post">
+    <button type="submit">Perform Sweep</button>
+  </form>
+{% endblock %}

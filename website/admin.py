@@ -2,6 +2,8 @@ from flask import Blueprint, render_template, redirect, flash, url_for, request
 from .utils import adminreq
 from flask_login import login_required, current_user
 from .models import db, User, LogEvent, Post, Likes, Comment, Media
+from sqlalchemy import desc
+import os
 
 admin = Blueprint('admin', __name__)
 
@@ -122,10 +124,35 @@ def adminlogs(username):
 @login_required
 @adminreq
 def admintotalposts(username):
-    post = Post.query.all()
-    media = Media.query.all()
+    post = Post.query.order_by(desc(Post.updated_at)).all()
 
-    return render_template('admintotalposts.html', username=username, post=post, media=media)
+    return render_template('admintotalposts.html', username=username, post=post)
+
+@admin.route('/<username>/adminhome/adminsweep')
+@login_required
+@adminreq
+def adminsweep(username):
+    return render_template('adminsweep.html', username=username)
+
+@admin.route('/sweep_media', methods=['GET', 'POST'])
+@login_required
+@adminreq
+def sweep_media():
+    # Get all media URLs from the database
+    media_urls = [media.media_url for media in Media.query.all()]
+
+    # Get all files in the uploads folder
+    uploads_folder = 'D:/interactify-uploads'
+    all_files = os.listdir(uploads_folder)
+
+    # Iterate over files in the uploads folder
+    for file in all_files:
+        # If the file is not in the list of media URLs, delete it
+        if file not in media_urls:
+            os.remove(os.path.join(uploads_folder, file))
+
+    flash("Sweep operation completed successfully.")
+    return redirect(url_for('admin.adminsweep', username=current_user.username))
 
 @admin.route('/delete_post/<int:post_id>', methods=['POST'])
 @login_required
