@@ -47,28 +47,40 @@
 
   <div class="counts">
     <div class="admins-count">
-      <h2>Admins</h2>
-      <h1>{{ a1 }}</h1>
+      <a href="{{ url_for('admin.adminusers', username=current_user.username) }}">
+        <h2>Admins</h2>
+        <h1>{{ a1 }}</h1>
+      </a>
     </div>
     <div class="users-count">
-      <h2>Total Users</h2>
-      <h1>{{ b1 }}</h1>
+      <a href="{{ url_for('admin.adminusers', username=current_user.username) }}">
+        <h2>Total Users</h2>
+        <h1>{{ b1 }}</h1>
+      </a>
     </div>
     <div class="posts-count">
-      <h2>Total Posts</h2>
-      <h1>{{ c1 }}</h1>
+      <a href="{{ url_for('admin.admintotalposts', username=current_user.username) }}">
+        <h2>Total Posts</h2>
+        <h1>{{ c1 }}</h1>
+      </a>
     </div>
     <div class="media-count">
-      <h2>Total Uploads</h2>
-      <h1>{{ d1 }}</h1>
+      <a href="{{ url_for('admin.adminusers', username=current_user.username) }}">
+        <h2>Total Uploads</h2>
+        <h1>{{ d1 }}</h1>
+      </a>
     </div>
     <div class="likes-count">
-      <h2>Total Likes</h2>
-      <h1>{{ e1 }}</h1>
+      <a href="{{ url_for('admin.adminusers', username=current_user.username) }}">
+        <h2>Total Likes</h2>
+        <h1>{{ e1 }}</h1>
+      </a>
     </div>
     <div class="comments-count">
-      <h2>Total Comments</h2>
-      <h1>{{ f1 }}</h1>
+      <a href="{{ url_for('admin.adminusers', username=current_user.username) }}">
+        <h2>Total Comments</h2>
+        <h1>{{ f1 }}</h1>
+      </a>
     </div>
   </div>
 

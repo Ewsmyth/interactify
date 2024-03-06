@@ -118,6 +118,58 @@ def adminlogs(username):
     log_events = LogEvent.query.filter_by(status=False).order_by(LogEvent.timestamp.desc()).limit(60).all()
     return render_template('adminlogs.html', username=username, log_events=log_events)
 
+@admin.route('/<username>/adminhome/admintotalposts')
+@login_required
+@adminreq
+def admintotalposts(username):
+    post = Post.query.all()
+    media = Media.query.all()
+
+    return render_template('admintotalposts.html', username=username, post=post, media=media)
+
+@admin.route('/delete_post/<int:post_id>', methods=['POST'])
+@login_required
+@adminreq
+def delete_post(post_id):
+    post = Post.query.get_or_404(post_id)
+    # Delete associated comments
+    for comment in post.comments:
+        db.session.delete(comment)
+    # Delete associated likes
+    for like in post.liked_posts:
+        db.session.delete(like)
+    # Delete associated media records
+    for media in post.media:
+        db.session.delete(media)
+    db.session.delete(post)
+    db.session.commit()
+    return redirect(url_for('admin.admintotalposts', username=current_user.username))
+
+@admin.route('/delete_all_posts', methods=['POST'])
+@login_required
+@adminreq
+def delete_all_posts():
+    if request.method == 'POST':
+        # Delete all posts
+        posts = Post.query.all()
+        for post in posts:
+            # Delete associated comments
+            for comment in post.comments:
+                db.session.delete(comment)
+            # Delete associated likes
+            for like in post.liked_posts:
+                db.session.delete(like)
+            # Delete associated media records
+            for media in post.media:
+                db.session.delete(media)
+            db.session.delete(post)
+        db.session.commit()
+        flash("All posts deleted successfully")
+        return redirect(url_for('admin.admintotalposts', username=current_user.username))
+    else:
+        # Handle other methods (GET, etc.)
+        return "Method Not Allowed", 405
+    
 @admin.route('/<username>/adminprofile/adminupdate_theme', methods=['POST'])
 @login_required
 @adminreq

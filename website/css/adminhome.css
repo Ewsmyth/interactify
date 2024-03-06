@@ -3,6 +3,7 @@
     --search-bg: rgb(211, 211, 211);
     --bg-contrast: rgb(0, 0, 0);
     --head-shad: rgba(0, 0, 0, 0.384);
+    --tile-hover: rgba(206, 206, 206, 0.534);
     --table-br: rgba(167, 167, 167, 0.384);
     --bg-clear: rgba(36, 36, 36, 0.384);
     --bg-error: rgba(255, 0, 0, 0.479);
@@ -17,6 +18,7 @@ body.dark-mode {
     --search-bg: rgb(15, 15, 15);
     --bg-contrast: rgb(255, 255, 255);
     --head-shad: rgba(255, 255, 255, 0.384);
+    --tile-hover: rgba(10, 10, 10, 0.534);
     --table-br: rgba(19, 19, 19, 0.384);
     --bg-clear: rgba(0, 0, 0, 0.384);
     --bg-error: rgba(252, 95, 95, 0.589);
@@ -62,14 +64,29 @@ body.dark-mode {
     border-radius: 40px;
     box-shadow: 0 0 25px var(--head-shad);
 }
-.counts div h2 {
+.counts div a {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-decoration: none;
+    border-radius: 40px;
+    cursor: pointer;
+}
+.counts div a:hover {
+    background-color: var(--tile-hover);
+    transition: 0.4s;
+}
+.counts div a h2 {
     font-family: sans-serif;
     color: var(--bg-contrast);
     font-weight: 600;
     font-size: 34px;
     margin: 0;
 }
-.counts div h1 {
+.counts div a h1 {
     font-family: sans-serif;
     color: var(--bg-contrast);
     font-weight: 800;
