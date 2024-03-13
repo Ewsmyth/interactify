@@ -1,0 +1,152 @@
+:root {
+    --bg-color: rgb(255, 255, 255);
+    --black-white: rgb(0, 0, 0);
+    --btn-hover: rgb(223, 223, 223);
+    --popup-bg: rgb(247, 247, 247);
+}
+body.dark-mode {
+    --bg-color: rgb(43, 43, 43);
+    --black-white: rgb(131, 131, 131);
+    --btn-hover: rgb(0, 0, 0);
+    --popup-bg: rgb(36, 36, 36);
+}
+.banner-head {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 55px;
+}
+.banner-head h1 {
+    margin: 0;
+    text-align: center;
+    font-family: sans-serif;
+    font-weight: 800;
+    font-size: 34px;
+    color: var(--black-white);
+}
+.head-buttons {
+    display: flex;
+    justify-content: right;
+}
+.delete-all, 
+.clear-all {
+    border: none;
+    cursor: pointer;
+    margin-right: 2px;
+    font-family: sans-serif;
+    font-weight: 600;
+    border-radius: 8px;
+    background-color: transparent;
+    font-size: 18px;
+    padding: 5px 7px;
+    color: var(--black-white);
+}
+.delete-all:hover, 
+.clear-all:hover {
+    background-color: var(--btn-hover);
+}
+#posts-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+#posts-table th, 
+#posts-table td {
+    text-align: center;
+    border-bottom: 1px solid var(--btn-hover);
+    color: var(--black-white);
+    font-family: sans-serif;
+}
+#posts-table th:hover {
+    cursor: default;
+}
+#posts-table thead tr th h1 {
+    margin: 0;
+    font-family: sans-serif;
+    font-size: 20px;
+}
+#posts-table tbody tr td form input {
+    background-color: transparent;
+    border: none;
+    border-radius: 9px;
+    font-family: sans-serif;
+    font-weight: 600;
+    font-size: 16px;
+    color: var(--black-white);
+    cursor: pointer;
+    padding: 0;
+    height: 26px;
+    width: 70px;
+}
+#posts-table tbody tr td form input:hover {
+    background-color: var(--btn-hover);
+}
+.tooltip {
+    position: fixed;
+    background-color: #333;
+    color: #fff;
+    padding: 5px 10px;
+    border-radius: 5px;
+    font-size: 14px;
+    pointer-events: none; /* To prevent interference with mouse events */
+}
+/* Style for the custom pop-up menu */
+.popup-menu {
+    position: absolute;
+    background-color: var(--popup-bg);
+    min-width: 100px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+.popup-menu p {
+    margin: 0;
+    padding: 5px 7px;
+    font-family: sans-serif;
+    font-weight: 600;
+    color: var(--black-white);
+}
+.popup-menu div {
+    border-top: 1px solid rgb(0, 0, 0);
+}
+.search-col {
+    height: 34px;
+    display: flex;
+    align-items: center;
+}
+.search-col input {
+    background-color: transparent;
+    color: var(--black-white);
+    border: none;
+    height: 32px;
+    outline: none;
+    margin-right: 7px;
+}
+.search-col button {
+    height: 30px;
+    border-radius: 9px;
+    border: none;
+    font-family: sans-serif;
+    font-weight: 600;
+    color: var(--black-white);
+    border: none;
+    background-color: transparent;
+    cursor: pointer;
+}
+.search-col button:hover {
+    background-color: var(--btn-hover);
+}
+.popup-menu-item {
+    padding: 6px 5px;
+    cursor: pointer;
+    color: var(--black-white);
+    font-family: sans-serif;
+    font-size: 14px;
+}
+.popup-menu-item:hover {
+    background-color: var(--btn-hover);
+}
+#keyword-input {
+    margin-left: 5px;
+    width: 90px;
+}
+.popup-menu div button {
+    margin-right: 4px;
+}

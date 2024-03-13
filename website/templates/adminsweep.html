@@ -8,8 +8,28 @@
 {% endblock %}
 
 {% block content %}
-  <h1>Admin Sweep</h1>
-  <form action="{{ url_for('admin.sweep_media') }}" method="post">
-    <button type="submit">Perform Sweep</button>
-  </form>
+  <div class="content">
+    <div class="title">
+      <h1>Sweep Server</h1>
+    </div>
+    <h3>What does the Sweeping function do?</h3>
+    <p>The Sweeping function is meant to save storage on your server. The function scans the database for image/video files and then deletes images from the uploads directory that are not in the database.</p>
+    <h3>What do I do before I Sweep my server?</h3>
+    <p>Before you Sweep you need to delete posts or users that you no longer intend to use. Deletion of posts or users must be done through the Admin portal otherwise the user wont actually be deleted from the database. When a user is logged into a user account they don’t actually have the authority to delete things from the database, they can only change the Boolean for the archive status.</p>
+    <form id="sweep-form" action="{{ url_for('admin.sweep_media') }}" method="post">
+      <button id="perform-sweep">Perform Sweep</button>
+    </form>
+  </div>
+  <script>
+    // JavaScript code for pop-up confirmation
+    document.getElementById('perform-sweep').addEventListener('click', function(event) {
+      event.preventDefault();
+      var filesToDelete = "{{ files_to_delete|join('\n') }}"; // Get list of files to delete
+      var confirmation = confirm("Are you sure you want to delete the following files?" + filesToDelete);
+      if (confirmation) {
+        document.getElementById('sweep-form').submit(); // Submit the form if confirmed
+      }
+    });
+  </script>
+
 {% endblock %}

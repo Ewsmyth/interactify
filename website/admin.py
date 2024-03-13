@@ -145,10 +145,13 @@ def sweep_media():
     uploads_folder = '/var/lib/docker/volumes/interactify-uploads'
     all_files = os.listdir(uploads_folder)
 
+    # Get all profile pictures from the database
+    profile_pictures = [user.profile_picture for user in User.query.all() if user.profile_picture]
+
     # Iterate over files in the uploads folder
     for file in all_files:
-        # If the file is not in the list of media URLs, delete it
-        if file not in media_urls:
+        # If the file is not in the list of media URLs or profile pictures, delete it
+        if file not in media_urls and file not in profile_pictures:
             os.remove(os.path.join(uploads_folder, file))
 
     flash("Sweep operation completed successfully.")

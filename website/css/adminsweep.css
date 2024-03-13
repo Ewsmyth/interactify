@@ -1,0 +1,61 @@
+:root {
+    --bg-color: rgb(255, 255, 255);
+    --black-grey: rgb(0, 0, 0);
+    --btn-hover: rgb(223, 223, 223);
+    --popup-bg: rgb(247, 247, 247);
+}
+body.dark-mode {
+    --bg-color: rgb(43, 43, 43);
+    --black-grey: rgb(131, 131, 131);
+    --btn-hover: rgb(0, 0, 0);
+    --popup-bg: rgb(36, 36, 36);
+}
+.content {
+    display: flex;
+    flex-direction: column;
+}
+.title {
+    display: flex;
+    align-items: center;
+    height: 45px;
+    border-bottom: 4px solid var(--black-grey);
+}
+h1,
+h3,
+p {
+    color: var(--black-grey);
+    font-family: sans-serif;
+}
+h1,
+p {
+    padding: 0 10px;
+}
+h1 {
+    font-weight: 900;
+}
+p {
+    margin: 5px 0;
+    font-weight: 100;
+}
+h3 { 
+    border-bottom: 2px solid var(--black-grey);
+    margin: 10px 10px 0 10px;
+    font-weight: 700;
+}
+#perform-sweep {
+    margin: 10px 0 0 10px;
+    cursor: pointer;
+    padding: 0;
+    font-family: sans-serif;
+    font-weight: 600;
+    font-size: 15px;
+    width: 120px;
+    height: 27px;
+    border-radius: 8px;
+    border: none;
+    background-color: transparent;
+    color: var(--black-grey);
+}
+#perform-sweep:hover {
+    background-color: var(--btn-hover);
+}

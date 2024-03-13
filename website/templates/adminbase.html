@@ -43,6 +43,14 @@
       </div>
     </a>
 
+    <a class="alpha all-posts-a" href="{{ url_for('admin.admintotalposts', username=current_user.username) }}">
+      <div class="bravo all-posts-div">
+        <div class="charlie all-posts-icon"></div>
+        <h3 class="delta all-posts-h3">All Posts</h3>
+        <span class="echo all-posts-span">All Posts</span>
+      </div>
+    </a>
+
     <a class="alpha sweep-a" href="{{ url_for('admin.adminsweep', username=current_user.username) }}">
       <div class="bravo sweep-div">
         <div class="charlie sweep-icon"></div>

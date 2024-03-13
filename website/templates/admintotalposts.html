@@ -9,63 +9,65 @@
 
 {% block content %}
 
-  <form id="delete-all-form" action="{{ url_for('admin.delete_all_posts') }}" method="post">
-    <input type="submit" value="Delete All Posts">
-  </form>
+  <div class="banner-head">
+    <h1>All Posts</h1>
+  </div>
 
-  <table>
-    <thead>
-      <tr>
-        <th>Post ID</th>
-        <th>Author ID</th>
-        <th>Content</th>
-        <th>Archive</th>
-        <th>Created Datetime</th>
-        <th>Updated Datetime</th>
-        <th>Delete Post</th>
-      </tr>
-    </thead>
-    <tbody>
-      {% for posts in post %}
+  <div class="head-buttons">
+    <!-- Button to clear all filters -->
+    <a href="{{ url_for('admin.admintotalposts', username=current_user.username) }}"><button class="clear-all">Clear filters</button></a>
+    <form id="delete-all-form" action="{{ url_for('admin.delete_all_posts') }}" method="post">
+      <input class="delete-all" type="submit" value="Delete All">
+    </form>
+  </div>
+
+  <div class="table-container">
+    <table id="posts-table">
+      <thead>
         <tr>
-          <td>{{ posts.id }}</td>
-          <td>{{ posts.author_id }}</td>
-          <td>{{ posts.content }}</td>
-          <td>{{ posts.archive }}</td>
-          <td>{{ posts.created_at.strftime("%b %d, %Y: %H:%M") }}</td>
-          <td>{{ posts.updated_at.strftime("%b %d, %Y: %H:%M") }}</td>
-          <td>
-            <form action="{{ url_for('admin.delete_post', post_id=posts.id) }}", method="post">
-              <input type="submit" value="Delete">
-            </form>
-          </td>
+          <th oncontextmenu="showPopup(event, 0)"><h1>Post ID</h1></th>
+          <th oncontextmenu="showPopup(event, 1)"><h1>Author ID</h1></th>
+          <th oncontextmenu="showPopup(event, 2)"><h1>Content</h1></th>
+          <th oncontextmenu="showPopup(event, 3)"><h1>Archive</h1></th>
+          <th oncontextmenu="showPopup(event, 4)"><h1>Created Datetime</h1></th>
+          <th oncontextmenu="showPopup(event, 5)"><h1>Updated Datetime</h1></th>
+          <th><h1>Delete Post</h1></th>
         </tr>
-      {% endfor %}
-    </tbody>
-  </table>
+      </thead>
+      <tbody>
+        {% for posts in post %}
+          <tr>
+            <td>{{ posts.id }}</td>
+            <td>{{ posts.author_id }}</td>
+            <td>{{ posts.content }}</td>
+            <td>{{ posts.archive }}</td>
+            <td>{{ posts.created_at.strftime("%b %d, %Y: %H:%M") }}</td>
+            <td>{{ posts.updated_at.strftime("%b %d, %Y: %H:%M") }}</td>
+            <td>
+              <form action="{{ url_for('admin.delete_post', post_id=posts.id) }}", method="post">
+                <input type="submit" value="Delete">
+              </form>
+            </td>
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
 
-  <script>
-    document.querySelectorAll('form').forEach(form => {
-      form.addEventListener('submit', (e) => {
-        e.preventDefault();
-        if (confirm('Are you sure you want to delete this post?')) {
-          e.target.submit();
-        }
-      });
-    });
-  </script>
-  <script>
-    document.getElementById('delete-all-form').addEventListener('submit', function(event) {
-      // Display the first confirmation dialog
-      if (!confirm("Are you sure you want to delete all posts? This action is not reversible.")) {
-        event.preventDefault(); // Prevent the form submission
-      } else {
-        // Display the second confirmation dialog
-        if (!confirm("By clicking 'Okay', you are confirming the deletion of all posts on this site.")) {
-          event.preventDefault(); // Prevent the form submission
-        }
-      }
-    });
-  </script>
+  <!-- Custom pop-up menu -->
+  <div id="popup-menu" class="popup-menu" style="display: none;">
+    <p class="popup-title"></p> <!-- Add the p element for the title -->
+    <div class="search-col">
+      <input type="text" id="keyword-input" placeholder="Search...">
+      <button onclick="searchTable()">Go</button>
+    </div>
+    <div class="popup-menu-item" onclick="sortTable('asc')">A to Z</div>
+    <div class="popup-menu-item" onclick="sortTable('desc')">Z to A</div>
+  </div>
+
+  <!-- Tooltip element -->
+  <div id="tooltip" class="tooltip" style="display: none;"></div>
+
+  <script src="{{ url_for('utils.staticp', filename='js/filterMenu.js') }}"></script>
 
 {% endblock %}
